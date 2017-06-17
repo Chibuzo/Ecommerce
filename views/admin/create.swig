@@ -47,7 +47,7 @@ $("#signup").submit(function(e) {
 
 	$.post('/admin/create', $(this).serialize(), function(d) {
 		if(d.status.trim() == '01') {
-			location.href = '/admin/login';
+			location.href = '/admin';
 		} else {
 			$(".alert-danger").html("<strong>Error:</strong> " + d.msg).removeClass('hidden');
 		}
