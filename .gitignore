@@ -40,7 +40,7 @@
 ################################################
 
 config/local.js
-assets/product_photos/*
+asset/product_photos/*
 
 
 
