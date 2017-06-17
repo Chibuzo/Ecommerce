@@ -7,7 +7,9 @@
 	margin-right: 15px;
 	border-radius: 3px;
 	margin-left: 20px;
+  margin-top: 60px;
 	padding: 0;
+  overflow: hidden;
 }
 
 .inner-div h4 {
@@ -19,7 +21,7 @@
 	font-weight: bold;
 }
 
-#edit-form {
+#edit-form, #user-details {
 	padding: 4px 10px;
 }
 
@@ -77,9 +79,11 @@ address {
 							</div>
 							<input type="hidden" name="user_id" value="{{ user.id }}" />
               <input type="hidden" name="contact_id" value="{{ user.contacts[0].id }}" />
-							<input type="submit" class="btn btn-warning" value="Save details" />
-							<button class="btn btn-default" id="cancel">Cancel</button>
+							<input type="submit" class="btn btn-danger pull-right" value="Save details" />
+							<button class="btn btn-default pull-right" id="cancel">Cancel</button>
+              <br>
 						</form>
+            <br>
 					</div>
 
 					<div id='menu'>
@@ -90,7 +94,7 @@ address {
       </div>
       <div class="col-md-6">
         <div class="inner-div">
-          <h4>Content</h4>
+          <h4>Pending Order</h4>
         </div>
       </div>
     </div>

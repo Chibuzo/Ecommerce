@@ -61,6 +61,14 @@ module.exports = {
     //activateAccount: function(req, res) {
     //
     //},
+    
+    findAccount: function(req, res) {
+        User.findOne({ email: req.param('email') }).exec(function(err, foundUser) {
+           if (err) return res.json(200, { status: 'Err', msg: err });
+           if (!foundUser) return res.json(200, { status: 'Err', msg : 'User not found' });
+           return res.json(200, { status: 'Found' });
+        });
+    },
 
     signin: function(req, res) {
         User.findOne({ email: req.param('email') }).exec(function(err, foundUser) {
@@ -68,7 +76,7 @@ module.exports = {
             if (!foundUser) return res.json(200, { status: 'Err', msg : 'User not found' });
 
             Passwords.checkPassword({
-                passwordAttempt: req.param('password'),
+                passwordAttempt: req.param('l_password'),
                 encryptedPassword: foundUser.password
             }).exec({
                 error: function (err) {
@@ -103,7 +111,6 @@ module.exports = {
             if (err) {
                 return res.negotiate(err);
             }
-        console.log(user);
             return res.view('user/dashboard', { user: user });
         });
     },
@@ -115,7 +122,7 @@ module.exports = {
             address: q('address'),
             user: req.session.userId
         };
-        User.update({ id: q('user_id') }, { fullname: q('fullname') }).exec(function() {});
+        User.update({ id: q('user_id') }, { fullname: q('fullname'), phone: q('phone') }).exec(function() {});
         UserContact.findOne({ id: q('contact_id') }).exec(function(err, cn) {
             if (err) { return res.json(200, { status: 'error', msg: err }); }
             if (cn) {
@@ -139,7 +146,7 @@ module.exports = {
                 return res.redirect('/');
             }
             req.session.userId = null;
-            return res.redirect('/signin');
+            return res.redirect('/');
         });
     },
 

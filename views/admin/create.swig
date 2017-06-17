@@ -1,10 +1,9 @@
 {% extends '../theme.swig' %}
 {% set title = 'Admin Sign up' %}
 <style>
-body.landing-page { background-color: #2f4050 !important; }
 </style>
 {% block body %}
-<section class="container" style="margin-top: 60px">
+<section class="container" style="margin-top: 20px">
     <div class="row">
         <div class="auth-panel">
             <h2 class="text-center">SIGN UP</h2><br>
@@ -37,7 +36,6 @@ body.landing-page { background-color: #2f4050 !important; }
 
 {% block script %}
 {#<script>#}
-$('body').css('background-color', '#2f4050');
 $("#signup").submit(function(e) {
 	e.preventDefault();
 	var $this = $(this);

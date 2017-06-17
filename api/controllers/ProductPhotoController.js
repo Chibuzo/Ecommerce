@@ -44,24 +44,24 @@ module.exports = {
             // resize product photos
             // zoom image
             gm(sails.config.appPath + '/assets/product_photos/zoom/' + filename)
-            .resizeExact(null, 580)
+            .resizeExact(245, null)
             .write(sails.config.appPath + '/assets/product_photos/' + filename, function (err) {
                 if (err) console.log(err);
             });
             
             // browse image
             gm(sails.config.appPath + '/assets/product_photos/zoom/' + filename)
-            .resizeExact(245, null)
+            .resizeExact(null, 200)
             .write(sails.config.appPath + '/assets/product_photos/browse/' + filename, function (err) {
                 if (err) console.log(err);
             });
             
             // thumbnail image
-            //gm(sails.config.appPath + '/assets/product_photos/' + filename)
-            //.resize(null, 50)
-            //.write(sails.config.appPath + '/assets/product_photos/thumbnail/' + filename, function () {
-            //    if (!err) console.log('done');
-            //});
+            gm(sails.config.appPath + '/assets/product_photos/zoom/' + filename)
+            .resizeExact(null, 89)
+            .write(sails.config.appPath + '/assets/product_photos/thumbnail/' + filename, function () {
+                if (err) console.log('done');
+            });
             return res.redirect('/item/' + req.param('product_id'));
         });
     },
@@ -79,6 +79,7 @@ module.exports = {
                 fs.unlink(sails.config.appPath + '/assets/product_photos/' + photo_name);
                 fs.unlink(sails.config.appPath + '/assets/product_photos/zoom/' + photo_name);
                 fs.unlink(sails.config.appPath + '/assets/product_photos/browse/' + photo_name);
+                fs.unlink(sails.config.appPath + '/assets/product_photos/thumbnail/' + photo_name);
             });
             return res.json(200, { status: 'success' });
         });

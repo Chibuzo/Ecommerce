@@ -49,7 +49,7 @@
 }
 
 .item-thumb img {
-  width: 60px;
+  width: 40px;
 }
 </style>  
 <div class="ckeckout">
@@ -66,22 +66,23 @@
 		 </div>
       
       <div class="row" style="margin-top: 30px">
-        <div class="col-md-4 col-xs-12 pull-right">
-            <div class="calc">
+        <div class="col-md-3 col-xs-12 pull-right">
+            <div>
                 <div class="dl-horizontal">
                     <dt>Sub Total:</dt><dd class="dd simpleCart_total"></dd>
-                    <dt>Delivery Cost:</dt><dd>&#8358; 1500</dd>
-                    <dt>Total:</dt><dd>&#8358; 3400</dd>
+                    <dt>Delivery Cost:</dt><dd class="simpleCart_shipping"></dd>
+                    <dt>Total:</dt><dd class="simpleCart_grandTotal"></dd>
                 </div>
                 <br>
             </div>
         </div>
     </div>
     <div class="row">
-      <div class="col-md-12" style="padding-right: 40px">
+      <div class="col-md-12" style="padding-right: 10px">
         <a href="/checkout" class="btn btn-danger btn-lg pull-right">Proceed to Payment</a>
       </div>
     </div>  
 		</div>
 	</div>
-  {% endblock %}
+{% endblock %}
+  

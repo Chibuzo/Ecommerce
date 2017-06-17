@@ -98,7 +98,7 @@
                                           <strong>{{ feat.feature_name }}: </strong>{{ feat.feature_value }}
                                           <div class="opt pull-right">
 <!--                                              <a href='' class='edit-feature' data-toggle="tooltip" title='Edit Feature'>Edit</a> .-->
-                                              <a href='/remove-feature/{{ feat.id }}' data-toggle="tooltip" title="Remove Feature">Del</a>
+                                              <a href='/remove-feature/{{ feat.id }}' data-toggle="tooltip" title="Remove Feature">Delete</a>
                                           </div>
                                       </div>
                                     {% endif %}  
@@ -133,8 +133,9 @@ $("#photo-control").change(function() {
 });
 
 $(".remove-photo").click(function() {
+  var picname = $(this).parents('.menu').data('photo-name');
+  if (picname == 'product.png') return false;
   if (confirm("Are you sure you want to delete this photo?")) {
-      var picname = $(this).parents('.menu').data('photo-name');
       $.get('/productphoto/delete/' + picname, function(d) {
           if (d.status.trim() == 'success') {
               location.reload();

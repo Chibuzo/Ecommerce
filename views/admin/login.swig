@@ -1,10 +1,10 @@
 {% extends '../theme.swig' %}
 {% set title = 'Admin Login' %}
 {% block body %}
-	<section class="container" style="margin-top: 140px">
+	<section class="container" style="margin-top: 20px">
 		<div class="row">
 			<div class="auth-panel">
-				<h2 class="text-center">SIGN IN</h2><br>
+				<h2 class="text-center">Authentication</h2><br>
 				<form action="" method="post" class="form-vertical" id="signin">
 					<div class="form-group">
 						<label>EMAIL</label>
@@ -24,7 +24,6 @@
 
 {% block script %}
 	{#<script>#}
-	$('body').css('background-color', '#2f4050');
 
 	$("#signin").submit(function(e) {
 		e.preventDefault();

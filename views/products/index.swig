@@ -2,10 +2,10 @@
 {% block body %}
  
 <style>
-.itemphoto {
-    width: 120px !important;
+.product-grid {
+  width: 19%;
+  float: left;
 }
-
 .grid {
   text-align: center;
   padding-bottom: 40px;
@@ -242,8 +242,7 @@ p.m_5 {
   </script>  
 <div class="shoes"> 
 		<div class="container">
-      <div class="row">
-        
+      <div class="row hidden">
           <div class="col-md-2">
               <div class="grid">
                 <div class="portfolio app mix_all" data-cat="app" style="display: inline-block; opacity: 1;">
@@ -255,25 +254,54 @@ p.m_5 {
                   </div>
                 </div>		
                 <p class="text-center">Big block Lether Bag</p>
-                <h2 class="text-center">$350.00</h2>
+                <h2 class="text-center">&#8358;350.00</h2>
                 <p class="text-center"><a href="details.html">Buy</a></p>
               </div>
           </div>
       </div>
 			<div class="row">
         {% for item in products %}
-          <div class="col-md-3 product-left"> 
-            <div class="p-one simpleCart_shelfItem">							
-                <a href="/item/view/{{ item.id }}">
-                  <img src="/product_photos/browse/{{ item.productphotos[0].photo_name }}" alt="" class="item-photo item_thumb" />
-                  <div class="mask">
-                    <span>Quick View</span>
-                  </div>
-                </a>
-                <div class="item_name hidden">{{ item.product_name }}</div>
-                <div class="item_cid hidden">{{ item.id }}</div>
-              <h4>{{ item.product_name }}</h4>
-              <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.selling_price }}</span></a></p>
+          <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="product-left"> 
+              <div class="p-one simpleCart_shelfItem">							
+                  <a href="/item/view/{{ item.id }}">
+                    {% if item.productphotos[0] %}
+                      <img src="/product_photos/browse/{{ item.productphotos[0].photo_name }}" alt="" class="item_thumb" />
+                    {% else %}
+                      <img src="/product_photos/browse/{{ item.productphotos[0].photo_name }}" alt="" class="item_thumb" />
+                    {% endif %}  
+                    <div class="mask">
+                      <span>Quick View</span>
+                    </div>
+                  </a>
+                  <div class="item_name hidden">{{ item.product_name }}</div>
+                  <div class="item_cid hidden">{{ item.id }}</div>
+                <h4>{{ item.product_name }}</h4>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.selling_price | formatCurrency }}</span></a></p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        
+        {% for item in products %}
+          <div class="col-md-2">
+            <div class="product-left"> 
+              <div class="p-one simpleCart_shelfItem">							
+                  <a href="/item/view/{{ item.id }}">
+                    {% if item.productphotos[0] %}
+                      <img src="/product_photos/browse/{{ item.productphotos[0].photo_name }}" alt="" class="item_thumb" />
+                    {% else %}
+                      <img src="/product_photos/browse/{{ item.productphotos[0].photo_name }}" alt="" class="item_thumb" />
+                    {% endif %}  
+                    <div class="mask">
+                      <span>Quick View</span>
+                    </div>
+                  </a>
+                  <div class="item_name hidden">{{ item.product_name }}</div>
+                  <div class="item_cid hidden">{{ item.id }}</div>
+                <h4>{{ item.product_name }}</h4>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.selling_price }}</span></a></p>
+              </div>
             </div>
           </div>
         {% endfor %}  

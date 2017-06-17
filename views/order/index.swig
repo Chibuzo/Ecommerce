@@ -30,16 +30,16 @@
                     <thead>
                         <tr>
                             <th>Order Date</th>
-                            <th>Customer Name</th>
+                            <th>Customer</th>
                             <th>Phone</th>
                             <th class="text-right">Items</th>
                             <th>Delivery</th>
                             <th>Payment Method</th>
-                            <th>Payment Status</th>
-                            <th class="text-right">Sub Total</th>
-                            <th class="text-right">Delivery Fees</th>
+                            <th>Payment</th>
+                            <th class="text-right hidden">Sub Total</th>
+                            <th class="text-right hidden">Delivery Fees</th>
                             <th class="text-right">Total</th>
-                            <th class="text-center">Order Status</th>
+                            <th class="text-center">Order</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -51,16 +51,16 @@
                             {% set payment_status = 'Pending' %}
                           {% endif %}  
                           <tr id="{{ order.id }}">
-                              <td>{{ order.createdAt | date('d M Y, H:i') }}</td>
+                              <td>{{ order.createdAt | date('d M y, H:i') }}</td>
                               <td>{{ order.user.fullname }}</td>
                               <td>{{ order.user.phone }}</td>
-                              <td>{{ order.item_count }}</td>
+                              <td class="text-right">{{ order.item_count }}</td>
                               <td>{{ order.delivery }}</td>
                               <td>{{ order.payment_method }}</td>
                               <td>{{ payment_status }}</td>
-                              <td class="text-right">&#8358;{{ order.total }}</td>
-                              <td class="text-right">&#8358;{{ order.delivery_fee }}</td>
-                              <td class="text-right">&#8358;{{ order.total + order.delivery_fee }}</td>
+                              <td class="text-right hidden">&#8358;{{ order.total | formatCurrency }}</td>
+                              <td class="text-right hidden">&#8358;{{ order.delivery_fee | formatCurrency }}</td>
+                              <td class="text-right">&#8358;{{ (order.total) | formatCurrency }}</td>
                               <td class="text-center">{{ order.status }}</td>
                               <td class="opt-icons">
                                   <a href='' class=""><i class="fa fa-cog"></i></a>
@@ -75,3 +75,13 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block script %}
+  
+
+  
+$(function () {
+	$('[data-toggle="tooltip"]').tooltip();
+});  
+{% endblock %}  

@@ -81,6 +81,7 @@ module.exports = {
                         return res.json(200, { status: 'Err', msg: "'Your account has been banned, most likely for violation of the Terms of Service. Please contact us.'"});
                     }
                     req.session.admin_id = foundUser.id;
+                    req.session.admin = true;
                     req.session.fname = foundUser.fullname;
                     return res.json(200, { status: 'Ok' });
                 }
@@ -96,13 +97,18 @@ module.exports = {
             if (err) {
                 return res.negotiate(err);
             }
-
-            return res.view('admin/dashboard', {
-                me: {
-                    id: user.id,
-                    fname: user.fullname,
-                    email: user.email,
-                }
+            Order.find().populate('user').sort({ createdAt: 'desc'}).limit(10).exec(function(err, orders) {
+                if (err) return console.log(err);
+                Payment.find().populate('user').sort({ createdAt: 'desc'}).limit(10).exec(function(err, payments) {
+                    if (err) return console.log(err);
+                    return res.view('admin/dashboard', {
+                        me: {
+                            id: user.id,
+                            fname: user.fullname,
+                            email: user.email,
+                        }, orders: orders, payments: payments
+                    });
+                });
             });
         });
     },

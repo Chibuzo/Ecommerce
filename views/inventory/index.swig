@@ -29,7 +29,7 @@
 							</div>
 						</div>
 						<div class="ibox-content">
-                <table class="table table-striped">
+                <table class="table table-striped dataTable table-bordered">
                     <thead>
                         <tr>
                             <th>Date Added</th>
@@ -40,6 +40,7 @@
                             <th>Color</th>
                             <th class="text-right">Cost Price</th>
                             <th class="text-right">Selling Price</th>
+                            <th class="hidden"></th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -52,8 +53,8 @@
                                 <td id="{{ item.sub_category.id }}">{{ item.sub_category.sub_category_name }}</td>
                                 <td class="text-right">{{ item.stock }}</td>
                                 <td>{{ item.color }}</td>
-                                <td class="text-right">&#8358;{{ item.cost_price }}</td>
-                                <td class="text-right">&#8358;{{ item.selling_price }}</td>
+                                <td class="text-right">&#8358;{{ item.cost_price | formatCurrency }}</td>
+                                <td class="text-right">&#8358;{{ item.selling_price | formatCurrency }}</td>
                                 <td class="hidden">{{ item.description }}</td>
                                 <td class="opt-icons">  
                                     <a href='' class='edit-item btn btn-default btn-xs' data-toggle='tooltip' title='Edit Item'><i class='fa fa-pencil fa-lg'></i></a>                                                                        
@@ -73,9 +74,11 @@
   
   {% include 'inventory-modal.swig' %}
   {% include 'edit-inventory-modal.swig' %}
-  
 {% endblock %}
 
+{% block scriptTag %}
+   <script src="/js/plugins/datatables.min.js"></script>
+{% endblock %}
 {% block script %}
 $(".category").change(function() {
   var category_id = $(this).find("option:selected").val();
@@ -124,13 +127,24 @@ $(".edit-item").click(function(e) {
     $("#editInventoryModal").modal();
 });
 
-$(".delete-item").click(function() {
+$(".delete-item").click(function(e) {
+    e.preventDefault();
     if (confirm("Are you sure you want to delete this item?")) {
         var id = $(this).parents('tr').attr('id');
         $.get('/product/delete/' + id);
     }
 });
-  
+
+
+$('.dataTable').DataTable({
+    pageLength: 25,
+    responsive: true,
+    responsive: true,
+    "aoColumnDefs": [
+         { 'bSortable': false, 'aTargets': [ 2, 3, 8 ] }
+       ]
+});
+
   
 $(function () {
 	$('[data-toggle="tooltip"]').tooltip();

@@ -2,10 +2,11 @@ module.exports.routes = {
 
     '/': 'BrowseController.index',
     
-    //'GET /admin/login': {
-    //    veiw: 'admin/login'
+    //'GET /admin': {
+    //   veiw: 'admin/login'
+    //},
     
-    'GET /admin/login': 'AdminController.showLogin',
+    'GET /admin': 'AdminController.showLogin',
     
     'GET /admin/add': {
         view: 'admin/create'
@@ -18,6 +19,8 @@ module.exports.routes = {
     'GET /user/signup': {
         view: 'user/signup'
     },
+    
+    'POST /user/findaccount': 'UserController.findAccount',
     
     'POST /user/signup': 'UserController.signup',
 
@@ -36,6 +39,8 @@ module.exports.routes = {
     'GET /admin/dashboard': 'AdminController.dashboard',
 
     'GET /admin/settings': 'AdminController.settings',
+    
+    'GET /admin/signout': 'AdminController.signout',
     
     'POST /account/add-account': 'BankAccountController.addBankAccount',
     
@@ -85,5 +90,5 @@ module.exports.routes = {
     
     //'GET /payment': 'PaymentController.paymentPage'
     // category route
-    //'GET /*/:id': 'BrowseController.findByCategory'
+    'GET /section/:id/*': 'BrowseController.findByCategory'
 };

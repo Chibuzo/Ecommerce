@@ -18,6 +18,55 @@
 
 
 module.exports.policies = {
+  AdminController: {
+      '*': 'isAdmin',
+      showLogin: true,
+      login: true,
+      addAdmin: true,
+      signout: true
+  },
+  
+  UserController: {
+      '*': 'isLoggedIn',
+      signin: true,
+      signup: true,
+      findAccount: true,
+      signout: true
+  },
+  
+  OrderController: {
+      '*': 'isAdmin'
+  },
+  
+  ProductController: {
+      '*': 'isAdmin'
+  },
+  
+  ProductPhotoController: {
+      '*': 'isAdmin'
+  },
+  
+  BankAccountController: {
+      '*': 'isAdmin'
+  },
+  
+  CategoryController: {
+      '*': 'isAdmin'
+  },
+  
+  SubCategoryController: {
+      '*': 'isAdmin'
+  },
+  
+  PaymentController: {
+      '*': 'isAdmin'
+  },
+  
+  KeyFeaturesController: {
+      '*': 'isAdmin'
+  },
+  
+  
 
   /***************************************************************************
   *                                                                          *

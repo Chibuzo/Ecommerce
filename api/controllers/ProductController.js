@@ -7,7 +7,7 @@
 
 module.exports = {
     getAll: function(req, res) {
-        Product.find({ removed: 'false' }).populate('category').populate('sub_category').exec(function(err, products) {
+        Product.find({ removed: 'false' }).populate('category').populate('sub_category').sort({ createdAt: 'desc'}).exec(function(err, products) {
             if (err) return res.badRequest(err);
             Category.find({ removed: 'false' }).exec(function(err, cat) {
                 if (err) console.log(err);

@@ -12,7 +12,7 @@ module.exports = {
     
     checkoutPage: function(req, res) {
         if (!req.session.userId) {
-            return res.view('user/signin', { page: '/payment' });
+            return res.view('user/signin', { page: '/checkout' });
         }
         BankAccount.find().exec(function(err, acc) {
             if (err) {
@@ -34,7 +34,8 @@ module.exports = {
             item_count: q('itemCount'),
             total: q('total'),
             payment_method: q('payment_method'),
-            delivery: q('delivery_opt')
+            delivery: q('delivery_opt'),
+            delivery_fee: q('shipping')
         };
         Order.create(order).exec(function(err, ord) {
             if (err) return console.log(err);

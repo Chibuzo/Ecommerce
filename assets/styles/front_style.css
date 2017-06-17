@@ -7,6 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 body{
 	background:#fff;
 	font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 15px;
 }
 body a{
 	transition: 0.5s all;
@@ -17,7 +18,7 @@ body a{
 }
 /*--starts-top-header--*/
 .top-header {
-	padding: 3em 0px 1.5em 0px;
+	padding: 1.5em 0px 1em 0px;
   background: #000;
 }
 .search-bar input[type="text"] {
@@ -55,7 +56,7 @@ body a{
 
 
 #logo {
-  height: 50px;
+  height: 70px;
 }
 /*----*/
 .itemContainer{
@@ -129,7 +130,7 @@ a.simpleCart_empty {
 /*--end-bottom-header--*/
 /*--banner-starts--*/
 .banner-1{
-	background:url(../images/banner.png) no-repeat center;
+	background:url(../images/banner.jpg) no-repeat center;
 	min-height:600px;
 	background-size:cover;
 	-webkit-background-size:cover;
@@ -147,7 +148,7 @@ a.simpleCart_empty {
 	-ms-background-size:cover;
 }
 .banner-3{
-	background:url(../images/banner_iphone.jpg) no-repeat center;
+	background:url(../images/lg_b.jpg) no-repeat center;
 	min-height:600px;
 	background-size:cover;
 	-webkit-background-size:cover;
@@ -569,11 +570,13 @@ ol.breadcrumb {
 	padding:6em 0px;
 }
 .p-one {
-	border: 1px solid rgba(24, 27, 42, 0.13);
+	border: #fff solid thin;
 	padding: 40px 15px;
+  height: 366px;
 }
 .product-left:hover .p-one{
 	border: 1px solid #8c2830;
+/*  padding: 38px 13px;*/
 	transition: 0.5s all ease;
 	-webkit-transition: 0.5s all ease;
 	-moz-transition: 0.5s all ease;
@@ -592,7 +595,7 @@ ol.breadcrumb {
   /* Webkit: Animation duration; */
   -moz-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
-  width:100%;
+/*  width:100%;*/
 }
 .product-left:hover .p-one p a{
 	color: #8c2830;
@@ -604,7 +607,7 @@ ol.breadcrumb {
 	display: none;
 	position: absolute;
 	top: 44%;
-	left: 33%;
+	left: 27%;
 }
 .mask span{
 	background:#8c2830;
@@ -635,15 +638,15 @@ ol.breadcrumb {
 .p-one h4{
 	color: #242424;
 	font-size: 21px;
-	font-weight: 600;
+/*	font-weight: 600;*/
 	margin: 5px 0 0 0;
 }
 .p-one p {
-	font-size: 1.7em;
+	font-size: 1.5em;
 	color: #999;
 	font-family: 'Lato', sans-serif;
 	margin: 5px 0 0 0;
-	font-weight: 700;
+/*	font-weight: 700;*/
 	display: inline-block;
 	vertical-align: middle;
 }
@@ -836,11 +839,11 @@ h2.quick {
 	text-transform: uppercase;
 }
 p.quick_desc {
-	color: #999;
 	font-size: 13px;
-	line-height: 1.6em;
+	line-height: 1.3em;
 	margin-bottom: 2em;
-	font-family: 'Lato', sans-serif;
+	font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
 }
 ul.product-colors {
 	padding: 0;

@@ -32,7 +32,15 @@
 <!-- start menu -->
 <script src="/js/simpleCart.min.js"> </script>
 <script>
+  simpleCart.currency({ 
+      code: "NGN" ,
+      name: "Naira" ,
+      symbol: "₦" 
+  });
+
+
   simpleCart({
+    shippingFlatRate: 1500,
     cartColumns: [
         { attr: "cid" },
         { view: "image" , attr:'thumb', label: 'Item' },
@@ -48,7 +56,22 @@
 </script>
 <link href="/styles/memenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="/js/memenu.js"></script>
-<script>$(document).ready(function(){$(".memenu").memenu();});</script>				
+<script>$(document).ready(function(){$(".memenu").memenu();});</script>
+<style>
+  .auth-panel {
+    boder: #ccc solid thin;
+    margin: auto;
+    width: 500px;
+    padding: 20px 20px 50px 20px;
+    margin-top: 60px;
+    border-radius: 3px;
+    background-color: #fff;
+  }
+  
+  .auth-panel h3 {
+    font-family: 'Alegreya Sans SC', sans-serif;
+  }
+</style>
 </head>
 <body> 
 	<!--top-header-->
@@ -65,7 +88,7 @@
         <a href="/"><img src="/images/emblem.jpg" id="logo" /></a>
       </div>
 			<div class="col-md-4 top-header-middle">
-				<a href="/"><img src="/images/logo.jpg" alt="" id="coy-logo" /></a>
+				<a href="/"><img src="/images/logo_.jpg" alt="" id="coy-logo" /></a>
 			</div>
 			<div class="col-md-4 top-header-right">
 				<div class="cart box_1">
@@ -76,7 +99,20 @@
 						</a>
 						<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
 						<div class="clearfix"> </div>
-					</div>
+            {% if req.session.userId %}
+              <div class="btn-group">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Account <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="/user/dashboard"><i class="fa fa-home"></i> &nbsp;Dashboard</a></li>
+                  <li><a href="/user/signout"><i class="fa fa-sign-out"></i> &nbsp;Logout</a></li>
+                </ul>
+              </div>
+            {% else %}
+              <a href='/user/signin' class="btn btn-danger"><i class="fa fa-user"></i> &nbsp;Account</a>
+            {% endif %}  
+				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -90,7 +126,7 @@
 				<ul class="memenu skyblue">
           <li class="grid"><a href="/">Home</a></li>
           {% for cat in sails.product_categories %}
-            <li class="grid"><a href="/product/find-categroy/">{{ cat.category_name }}</a></li>
+            <li class="grid"><a href="/section/{{ cat.id }}/{{ cat.category_name | replace(' ', '-') | lower }}">{{ cat.category_name }}</a></li>
           {% endfor %}  
         </ul>
 			</div>
@@ -114,16 +150,18 @@
 				<p class="footer-class">© {{ Date() | date('Y') }} Kentz Ville Ltd.</p>
 			</div>
 		</div>
+    <script src="/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
-									$(document).ready(function() {
-										{% block script %}
-                  {% endblock %}
-										$().UItoTop({ easingType: 'easeOutQuart' });
-										
-									});
-								</script>
-		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+      $(document).ready(function() {
+        {% block script %}
+      {% endblock %}
+        $().UItoTop({ easingType: 'easeOutQuart' });
+        
+      });
+    </script>
+    {% block scriptTag %} {% endblock %}
 	</div>
-	<!--end-footer-text-->	
+	<!--end-footer-text-->
+  {% block modal %} {% endblock %}
 </body>
 </html>

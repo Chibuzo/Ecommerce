@@ -21,7 +21,11 @@ module.exports = {
     },
     
     findByCategory: function(req, res) {
-      
+        var id = req.param('id');
+        Product.find({ category: id, removed: false }).populate('productphotos').exec(function(err, items) {
+            if (err) return res.badRequest(err);
+            return res.view('products/index', { products: items });
+        });
     }
 };
 

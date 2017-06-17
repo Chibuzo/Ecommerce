@@ -9,7 +9,8 @@
 
     <link href="/styles/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/font-awesome.min.css" rel="stylesheet">
-    <link href="/stylel/plugins/bootstrap-datepicker3.css" rel="stylesheet">
+    <link href="/styles/plugins/dataTables/dataTables.min.css" rel="stylesheet" />
+<!--    <link href="/stylel/plugins/bootstrap-datepicker3.css" rel="stylesheet">-->
 
     <link href="/styles/animate.css" rel="stylesheet">
     <link href="/styles/style.css" rel="stylesheet">
@@ -84,10 +85,6 @@
                 </li>
                 <li class="">
                     <a href="/payment/show"><i class="fa fa-money fa-lg fa-fw"></i> <span class="nav-label">Payments</span></a>
-                </li>
-
-                <li class="">
-                    <a href="/admin/users"><i class="fa fa-users fa-lg fa-fw"></i> <span class="nav-label">Users</span></a>
                 </li>
                 <li>
                     <a href="/admin/settings"><i class="fa fa-wrench fa-lg fa-fw"></i> <span class="nav-label">Settings</span></a>
@@ -234,8 +231,9 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="/js/jquery-2.1.1.js"></script>
-<script src="/js/bootstrap-datepicker.js"></script>
+<!--<script src="/js/jquery-3.1.1.min.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!--<script src="/js/bootstrap-datepicker.js"></script>-->
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -244,6 +242,7 @@
 <script src="/js/inspinia.js"></script>
 <script src="/js/plugins/pace/pace.min.js/"></script>
 
+{% block scriptTag %} {% endblock %}
 <script type="text/javascript">
 $(document).ready(function() {
     // load page using ajax

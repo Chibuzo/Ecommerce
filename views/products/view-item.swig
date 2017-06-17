@@ -15,7 +15,7 @@ body {
     font-size: 14px !important;
 }
 
-.quick_desc {
+.quickdesc {
   font-size: 14px !important;
 }
 
@@ -49,8 +49,8 @@ $(window).load(function() {
               <div class="flexslider">
                 <ul class="slides">
                   {% for photo in item.productphotos %}
-                    <li data-thumb="/product_photos/browse/{{ photo.photo_name }}">
-                      <img src="/product_photos/{{ photo.photo_name }}" stle="width: 480px !important" />
+                    <li data-thumb="/product_photos/thumbnail/{{ photo.photo_name }}">
+                      <img src="/product_photos/{{ photo.photo_name }}" />
                     </li>
                   {% endfor %}  
                 </ul>
