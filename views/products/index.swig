@@ -268,7 +268,7 @@ p.m_5 {
                     {% if item.productphotos[0] %}
                       <img src="/product_photos/browse/{{ item.productphotos[0].photo_name }}" alt="" class="item_thumb" />
                     {% else %}
-                      <img src="/product_photos/browse/{{ item.productphotos[0].photo_name }}" alt="" class="item_thumb" />
+                      <img src="/product_photos/browse/product.png" alt="" class="item_thumb" />
                     {% endif %}  
                     <div class="mask">
                       <span>Quick View</span>
