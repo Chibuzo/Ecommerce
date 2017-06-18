@@ -53,8 +53,15 @@ address {
           <h4>User Information</h4>
           <div id="user-details">
 						<span id='fullname'>{{ user.fullname }}</span><br />
-						<address>{{ user.contacts[0].address }}</address>
-						<p id='phone'>{{ user.contacts[0].phone }}</p>
+            {% if user.contacts[0] %}
+              {% set contact_id = user.contact[0].id %}
+              <address>{{ user.contacts[0].address }}</address>
+              <p id='phone'>{{ user.contacts[0].phone }}</p>
+            {% else %}
+              {% set contact_id = 0 %}
+              <address></address>
+              <p id='phone'></p>
+            {% endif %}  
 					</div>
 
 					<div id='edit-form'>
@@ -78,7 +85,7 @@ address {
 								<input type='text' class="form-control" name='phone' placeholder='Enter your phone number' />
 							</div>
 							<input type="hidden" name="user_id" value="{{ user.id }}" />
-              <input type="hidden" name="contact_id" value="{{ user.contacts[0].id }}" />
+              <input type="hidden" name="contact_id" value="{{ contact_id }}" />
 							<input type="submit" class="btn btn-danger pull-right" value="Save details" />
 							<button class="btn btn-default pull-right" id="cancel">Cancel</button>
               <br>
