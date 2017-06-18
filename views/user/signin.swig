@@ -99,7 +99,7 @@
                 $("#password-div").removeClass("hidden");
                 $this.find('button').html("<i class='fa fa-sign-in fa-lg'></i>&nbsp; Proceed").prop('disabled', false);
             });
-            $("#opt").val() = 'signin';
+            $("#opt").val('signin');
           } else {
             $(".alert-danger").html("<strong>Error:</strong> " + d.msg).removeClass('hidden');
           }
