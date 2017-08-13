@@ -60,11 +60,8 @@
 <style>
   .auth-panel {
     boder: #ccc solid thin;
-    margin: auto;
-    width: 500px;
     padding: 20px 20px 50px 20px;
     margin-top: 60px;
-    border-radius: 3px;
     background-color: #fff;
   }
   

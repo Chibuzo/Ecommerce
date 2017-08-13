@@ -6,7 +6,7 @@ body.landing-page { background-color: #2f4050 !important; }
 {% block body %}
 <section class="container" style="margin-top: 60px">
     <div class="row">
-        <div class="auth-panel">
+        <div class="col-md-5 col-md-offset-3">
             <h2 class="text-center">SIGN UP</h2><br>
 			<div class="alert alert-success hidden" id="confirm">Thank you for signing up with us. Please check your email for activation message.</div>
 			<form action="/user/signup" method="post" class="form-vertical" id="signup">

@@ -3,7 +3,7 @@
 {% block body %}
 	<section class="container" style="margin-top: 20px">
 		<div class="row">
-			<div class="auth-panel">
+			<div class="col-md-6 col-md-offset-3 auth-panel">
 				<h2 class="text-center">Authentication</h2><br>
 				<form action="" method="post" class="form-vertical" id="signin">
 					<div class="form-group">
@@ -15,7 +15,7 @@
 						<input type="password" name="password" class="form-control input-lg" required />
 					</div>
 					<div class="alert alert-danger hidden"></div>
-					<button type="submit" class="btn btn-primary input-lg btn-block"><i class="fa fa-sign-in fa-lg"></i>&nbsp; SIGN IN </button>
+					<button type="submit" class="btn btn-default input-lg btn-block"><i class="fa fa-sign-in fa-lg"></i>&nbsp; SIGN IN </button>
 				</form>
 			</div>
 		</div>

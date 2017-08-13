@@ -3,7 +3,7 @@
 {% block body %}
 	<section class="container">
 		<div class="row">
-			<div class="auth-panel">
+			<div class="col-md-6 col-md-offset-3 auth-panel">
 				<h3 class="text-center">Sign in to Continue</h3><br>
 				<form action="" method="post" class="form-vertical" id="signin">
 					<div class="form-group">
