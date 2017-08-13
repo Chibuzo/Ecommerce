@@ -38,7 +38,7 @@
 							<div class="ibox-tools">
 							</div>
 						</div>
-						<div class="ibox-content">
+						<div class="ibox-content table-responsive">
               <div class="row">
                 <div class="col-md-12">
                   <form action="/category/add-new" method="post" id="form-category">
@@ -54,7 +54,7 @@
                 </div>
               </div>
 							<div class="row">
-								<div class="col-md-12" id="">
+								<div class="col-md-12">
                     <table class="table table-striped">
                         <thead>
                             <tr>

@@ -85,7 +85,7 @@
         <a href="/"><img src="/images/emblem.jpg" id="logo" /></a>
       </div>
 			<div class="col-md-4 top-header-middle">
-				<a href="/"><img src="/images/logo_.jpg" alt="" id="coy-logo" /></a>
+				<a href="/"><img src="/images/logo_.jpg" class="hidden-xs" alt="" id="coy-logo" /></a>
 			</div>
 			<div class="col-md-4 top-header-right">
 				<div class="cart box_1">

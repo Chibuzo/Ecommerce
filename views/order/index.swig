@@ -25,7 +25,7 @@
 							<div class="ibox-tools">
 							</div>
 						</div>
-						<div class="ibox-content">
+						<div class="ibox-content table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>

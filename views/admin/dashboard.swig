@@ -24,7 +24,7 @@
 					<div class="ibox-title">
 						<h5>Recent Orders</h5>
 					</div>
-					<div class="ibox-content">
+					<div class="ibox-content table-responsive">
 						<table class="table table-striped">
               <thead>
                 <tr>
@@ -56,7 +56,7 @@
 					<div class="ibox-title">
 						<h5>Recent Payments</h5>
 					</div>
-					<div class="ibox-content">
+					<div class="ibox-content table-responsive">
 						<table class="table table-striped">
               <thead>
                 <tr>
