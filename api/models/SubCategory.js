@@ -24,7 +24,7 @@ module.exports = {
         
         removed: {
             type: 'boolean',
-            default: 'false'
+            defaultsTo: 'false'
         }
     }
 };

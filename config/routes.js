@@ -74,7 +74,7 @@ module.exports.routes = {
     
     'POST /product/update-feature': 'KeyFeaturesController.update',
     
-    'GET /remove-feature/:id': 'KeyFeaturesController.removeFeature',
+    'POST /remove-feature/:id': 'KeyFeaturesController.removeFeature',
     
     'GET /item/:id': 'ProductController.showItem',
     
@@ -86,7 +86,11 @@ module.exports.routes = {
     
     'POST /checkout/cart-items': 'CheckoutController.confirmationPage',
     
-    'GET /order/show-all': 'OrderController.showAll', 
+    'GET /order/show-all': 'OrderController.showAll',
+    
+    'GET /order/get-order-details': 'OrderItemsController.getOrderItems',
+    
+    'POST /order/change-status': 'OrderController.changeStatus', 
     
     //'GET /payment': 'PaymentController.paymentPage'
     // category route

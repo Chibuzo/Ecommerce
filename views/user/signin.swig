@@ -4,7 +4,7 @@
 	<section class="container">
 		<div class="row">
 			<div class="auth-panel">
-				<h3 class="text-center">Let's know how you are</h3><br>
+				<h3 class="text-center">Sign in to Continue</h3><br>
 				<form action="" method="post" class="form-vertical" id="signin">
 					<div class="form-group">
 						<label>Email Address</label>

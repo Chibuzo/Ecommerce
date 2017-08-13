@@ -67,8 +67,9 @@
                                 <tr id='{{ cat.id }}'>
                                     <td>{{ cat.category_name }}</td>
                                     <td class='opt-icons'>
-                                        <a href='' class='edit-category' data-toggle='tooltip' title='Edit Category'><i class='fa fa-pencil'></i></a>
-                                        <a href='' class='delete-category' data-toggle='tooltip' title='Remove Category'><i class='fa fa-trash'></i></a>
+                                        <a href='' class='edit-category' data-toggle='tooltip' title='Edit Category'><i class='fa fa-pencil fa-lg'></i></a>
+                                        <a href='' class='save-category hidden' data-toggle='tooltip' title='Save Category'><i class='fa fa-save fa-lg'></i></a>
+                                        <a href='' class='delete-category' data-toggle='tooltip' title='Remove Category'><i class='fa fa-trash fa-lg'></i></a>
                                     </td>
                                 </tr>    
                             {% endfor %}    
@@ -124,8 +125,9 @@
                                 <td>{{ sub.sub_category_name }}</td>
                                 <td>{{ sub.category.category_name }}</td>
                                 <td class="opt-icons">
-                                    <a href='' class='edit-sub-category' data-toggle='tooltip' title='Edit Sub Category'><i class='fa fa-pencil'></i></a>
-                                    <a href='' class='delete-sub-category' data-toggle='tooltip' title='Remove Sub Category'><i class='fa fa-trash'></i></a>
+                                    <a href='' class='edit-sub-category' data-toggle='tooltip' title='Edit Sub Category'><i class='fa fa-pencil fa-lg'></i></a>
+                                    <a href='' class='save-sub-category hidden' data-toggle='tooltip' title='Save Sub Category'><i class='fa fa-save fa-lg'></i></a>                                   
+                                    <a href='' class='delete-sub-category' data-toggle='tooltip' title='Remove Sub Category'><i class='fa fa-trash fa-lg'></i></a>
                                 </td>
                             </tr>
                         {% endfor %}    
@@ -234,6 +236,84 @@ $("#form-account").submit(function(e) {
 		}
 	}, 'JSON');
 });
+
+
+$(".edit-category").click(function(e) {
+    e.preventDefault();
+    var $this = $(this).parents('tr');
+    var category = $this.find('td:nth-child(1)').text();
+    $this.find('td:nth-child(1)').html("<input type='text' class='form-control' name='category' value='" + category + "' />");
+    $(this).addClass('hidden');
+    $this.find('.save-category').removeClass('hidden');
+});
+
+
+$(".save-category").click(function(e) {
+    e.preventDefault();
+    var $this = $(this).parents('tr');
+    var id = $this.attr("id");
+    var category = $this.find("input[name='category']").val();
+    $.post('/category/update', { 'category': category, 'id': id });
+    $this.find('td:nth-child(1)').text(category);
+    $(this).addClass('hidden');
+    $this.find('.edit-category').removeClass('hidden');
+});
+
+
+$(".delete-category").click(function(e) {
+    e.preventDefault();
+    if (confirm("Are you sure you want to remove this category?")) {
+        var $this = $(this).parents('tr');
+        var id = $this.attr("id");
+        $.post('/category/delete', { 'id': id });
+        $this.fadeOut();
+    }
+});
+
+var categories = {{ categories | json | safe }};
+var cat_opt = '';
+$(".edit-sub-category").click(function(e) {
+    e.preventDefault();
+    var $this = $(this).parents('tr');
+    var sub_category = $this.find('td:nth-child(1)').text();
+    var category = $this.find('td:nth-child(2)').text();
+    $this.find('td:nth-child(1)').html("<input type='text' class='form-control' name='sub_category' value='" + sub_category + "' />");
+    $.each(categories, function(i, cat) {
+        if (category == cat.category_name)
+            cat_opt += "<option value='" + cat.id + "' selected=selected>" + cat.category_name + "</option>";
+        else
+            cat_opt += "<option value='" + cat.id + "'>" + cat.category_name + "</option>";        
+    });
+    $this.find('td:nth-child(2)').html("<select name='category' class='form-control'>" + cat_opt + "</select>");
+    $(this).addClass('hidden');
+    $this.find('.save-sub-category').removeClass('hidden');
+});
+
+
+$(".save-sub-category").click(function(e) {
+    e.preventDefault();
+    var $this = $(this).parents('tr');
+    var id = $this.attr("id");
+    var sub_category = $this.find("input[name='sub_category']").val();
+    var category = $this.find("select[name='category'] option:selected").val();
+    $.post('/sub-category/update', { 'category': category, 'sub_category': sub_category, 'id': id });
+    $this.find('td:nth-child(1)').text(sub_category);
+    $this.find('td:nth-child(2)').text($this.find("select[name='category'] option:selected").text());
+    $(this).addClass('hidden');
+    $this.find('.edit-sub-category').removeClass('hidden');
+});
+
+
+$(".delete-sub-category").click(function(e) {
+    e.preventDefault();
+    if (confirm("Are you sure you want to remove this sub category?")) {
+        var $this = $(this).parents('tr');
+        var id = $this.attr("id");
+        $.post('/sub-category/delete', { 'id': id });
+        $this.fadeOut();
+    }
+});
+
 
 $(function () {
 	$('[data-toggle="tooltip"]').tooltip();

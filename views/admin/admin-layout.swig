@@ -83,9 +83,9 @@
                 <li>
                     <a href="/order/show-all"><i class="fa fa-shopping-cart fa-lg fa-fw"></i> <span class="nav-label">Orders</span></a>
                 </li>
-                <li class="">
+                <!--<li class="">
                     <a href="/payment/show"><i class="fa fa-money fa-lg fa-fw"></i> <span class="nav-label">Payments</span></a>
-                </li>
+                </li>-->
                 <li>
                     <a href="/admin/settings"><i class="fa fa-wrench fa-lg fa-fw"></i> <span class="nav-label">Settings</span></a>
                 </li>
@@ -231,8 +231,8 @@
 </div>
 
 <!-- Mainly scripts -->
-<!--<script src="/js/jquery-3.1.1.min.js"></script>-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/js/jquery-2.1.1.js"></script>
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 <!--<script src="/js/bootstrap-datepicker.js"></script>-->
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>

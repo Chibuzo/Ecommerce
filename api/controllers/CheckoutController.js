@@ -40,7 +40,7 @@ module.exports = {
         Order.create(order).exec(function(err, ord) {
             if (err) return console.log(err);
             var item, id;
-            for (var i = 1; i < q('itemCount'); i++) {
+            for (var i = 1; i <= q('itemCount'); i++) {
                 id = q('item_options_' + i).split(': ').pop();
                 item = {
                     order: ord.id,
@@ -49,7 +49,7 @@ module.exports = {
                     unit_price: q('item_price_' + i)
                 };
                 OrderItems.create(item).exec(function(err) {
-                    if (err) return console.log(err);
+                    if (err) console.log(err);
                 });
             }
         });

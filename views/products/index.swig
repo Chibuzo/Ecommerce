@@ -259,10 +259,10 @@ p.m_5 {
               </div>
           </div>
       </div>
-			<div class="row">
+			<div class="product-one">
         {% for item in products %}
-          <div class="col-md-2 col-sm-6 col-xs-12">
-            <div class="product-left"> 
+          <div class="">
+            <div class="col-md-3 product-left"> 
               <div class="p-one simpleCart_shelfItem">							
                   <a href="/item/view/{{ item.id }}">
                     {% if item.productphotos[0] %}
@@ -284,8 +284,8 @@ p.m_5 {
         {% endfor %}
         
         {% for item in products %}
-          <div class="col-md-2">
-            <div class="product-left"> 
+          <div class="">
+            <div class="col-md-3 product-left"> 
               <div class="p-one simpleCart_shelfItem">							
                   <a href="/item/view/{{ item.id }}">
                     {% if item.productphotos[0] %}
@@ -300,7 +300,7 @@ p.m_5 {
                   <div class="item_name hidden">{{ item.product_name }}</div>
                   <div class="item_cid hidden">{{ item.id }}</div>
                 <h4>{{ item.product_name }}</h4>
-                <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.selling_price }}</span></a></p>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.selling_price | formatCurrency }}</span></a></p>
               </div>
             </div>
           </div>

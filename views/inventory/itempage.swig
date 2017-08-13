@@ -98,7 +98,7 @@
                                           <strong>{{ feat.feature_name }}: </strong>{{ feat.feature_value }}
                                           <div class="opt pull-right">
 <!--                                              <a href='' class='edit-feature' data-toggle="tooltip" title='Edit Feature'>Edit</a> .-->
-                                              <a href='/remove-feature/{{ feat.id }}' data-toggle="tooltip" title="Remove Feature">Delete</a>
+                                              <a href='' class='delete-feature' id='{{ feat.id }}' data-toggle="tooltip" title="Remove Feature">Delete</a>
                                           </div>
                                       </div>
                                     {% endif %}  
@@ -142,6 +142,15 @@ $(".remove-photo").click(function() {
           }
       }, 'JSON');
   }
+});
+
+$(".delete-feature").click(function(e) {
+    e.preventDefault();
+    if (confirm("Are you sure you want to remove this item feature?")) {
+        var id = $(this).attr('id');
+        $.post('/remove-feature/' + id);
+        location.reload();
+    }
 });
 
 <!--// submit add key feature form-->
