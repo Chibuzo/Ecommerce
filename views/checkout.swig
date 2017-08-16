@@ -184,7 +184,7 @@ $('#form-edit').submit(function(e) {
         return false;
       }
       
-      if ($('#address').text().length < 0 || $('#phone').text().length < 0) {
+      if ($('#address').text().length < 1 || $('#phone').text().length < 7) {
           $(".alert-danger").html("<i class='fa fa-info-circle fa-lg'></i> &nbsp; Please make sure that your contact details is complete.").removeClass("hidden");
           return false;
       }
@@ -202,7 +202,8 @@ $('#form-edit').submit(function(e) {
             url: "/checkout/cart-items",
             extra_data: {
               total: total,
-              shipping: simpleCart.shipping()
+              shipping: simpleCart.shipping(),
+              quantity: simpleCart.quantity()
             }
         } 
     });

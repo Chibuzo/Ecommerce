@@ -31,7 +31,7 @@ module.exports = {
         var q = req.param;
         var order = {
             user: req.session.userId,
-            item_count: q('itemCount'),
+            item_count: q('quantity'),
             total: q('total'),
             payment_method: q('payment_method'),
             delivery: q('delivery_opt'),

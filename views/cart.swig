@@ -36,7 +36,7 @@
 }
 
 .item-quantity {
-  width: 50px;
+  width: 30px;
   text-align: center;
 }
 
@@ -45,11 +45,43 @@
 }
 
 .item-decrement, .item-increment {
-  width: 10px;
+  width: 5px;
 }
 
 .item-thumb img {
   width: 40px;
+}
+
+@media screen and (min-width: 200px) and (max-width: 600px) {
+  .item-thumb {
+    width: 30%;
+  }
+  
+  .item-name, .item-total {
+    width: auto;
+    float: none;
+  }
+  
+  .item-name {
+    font-weight: bold;
+  }
+  
+  .item-total, .item-remove {
+    position: relative;
+    width: 150px;
+    clear: left;
+    top: -34px;
+    left: 65px;
+  }
+  
+  .item-remove {
+    top: -21px;
+    left: 98px;
+  }
+  
+  .headerRow, .item-price {
+    display: none;
+  }
 }
 </style>  
 <div class="ckeckout">
@@ -60,21 +92,27 @@
 				
 			<div class="in-check" >        
         <div class="simpleCart_items"></div>
-				
 			</div>
 			</div>  
 		 </div>
       
       <div class="row" style="margin-top: 30px">
-        <div class="col-md-3 col-xs-12 pull-right">
-            <div>
-                <div class="dl-horizontal">
-                    <dt>Sub Total:</dt><dd class="dd simpleCart_total"></dd>
-                    <dt>Delivery Cost:</dt><dd class="simpleCart_shipping"></dd>
-                    <dt>Total:</dt><dd class="simpleCart_grandTotal"></dd>
+        <div class="col-md-3 col-xs-12 col-sm-12 pull-right">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                    <strong>
+                      Sub Total:
+                      <br>Delivery Cost:
+                      <br>Total:&nbsp;
+                    </strong>
                 </div>
-                <br>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="simpleCart_total"></div>
+                    <div class="simpleCart_shipping"></div>
+                    <div class="simpleCart_grandTotal"></div>
+                </div>
             </div>
+            <br>
         </div>
     </div>
     <div class="row">
