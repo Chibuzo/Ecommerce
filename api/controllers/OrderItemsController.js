@@ -6,14 +6,16 @@
  */
 
 module.exports = {
-    getOrderItems: function(req, res) {
-        OrderItems.find({ order: req.param('order_id') }).populate('product').exec(function(err, items) {
-            if (err) return;
-            UserContact.findOne({ user: req.param('user_id') }).exec(function(err, address) {
-                if (err) return;
-                return res.json(200, { status: 'success', items: items, address: address.address });
-            });
-        });
+    async getOrderItems(req, res) {
+        try {
+            const [items, address] = await Promise.all([
+                OrderItems.find({ order: req.param('order_id') }).populate('product'),
+                UserContact.findOne({ user: req.param('user_id') })
+            ]);
+            return res.json(200, { status: 'success', items, address: address.address });
+        } catch (err) {
+            return res.json(500, { status: 'error', message: err.message });
+        }
     }
 };
 

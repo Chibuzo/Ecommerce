@@ -8,35 +8,39 @@
 module.exports = {
 
     attributes: {
+        merchant: {
+            model: 'merchant'
+        },
+
         user: {
             model: 'user'
         },
-        
+
         item_count: {
             type: 'integer'
         },
-        
+
         total: {
             type: 'string'
         },
-        
+
         payment_method: {
             type: 'string'
         },
-        
+
         payment: {
             model: 'payment'
         },
-        
+
         status: {
             type: 'string',  // Pending, Processing, Delivered, cancelled
             defaultsTo: 'Pending'
         },
-        
+
         delivery: {
             type: 'string'  // Pick up, Courier
         },
-        
+
         delivery_fee: {
             type: 'float'
         }

@@ -1,5 +1,5 @@
 {% extends '../admin/admin-layout.swig' %}
-{% set title = 'Manage Inventory' %}
+{% set title = 'Manage Merchants' %}
 {% block body %}
   <div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-md-4">
@@ -9,12 +9,12 @@
 					<a href="index.html">Admin</a>
 				</li>
 				<li class="active">
-					<strong>Inventory</strong>
+					<strong>Merchants</strong>
 				</li>
 			</ol>
 		</div>
     <div class="col-md-8"><br>
-        <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal" data-target="#inventoryModal"><i class="fa fa-plus"></i> Add Inventory</button>
+        <button type="button" class="btn btn-danger btn-lg pull-right" data-toggle="modal" data-target="#merchantModal"><i class="fa fa-plus"></i> Add Merchant</button>
     </div>
 	</div>
 
@@ -33,33 +33,30 @@
                     <thead>
                         <tr>
                             <th>Date Added</th>
-                            <th>Item Name</th>
-                            <th>Category</th>
-                            <th>Sub Category</th>
-                            <th class="text-right">Stock</th>
-                            <th>Color</th>
-                            <th class="text-right">Cost Price</th>
-                            <th class="text-right">Selling Price</th>
-                            <th class="hidden"></th>
+                            <th>Merchant</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th class="text-right">Items</th>
+                            <th class="text-right">Current Orders</th>
+                            <th class="text-right">All Orders</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in items %}
-                            <tr id="{{ item.id }}">
-                                <td>{{ item.createdAt | date('d M Y') }}</td>
-                                <td>{{ item.product_name }}</td>
-                                <td id="{{ item.category.id }}">{{ item.category.category_name }}</td>
-                                <td id="{{ item.sub_category.id }}">{{ item.sub_category.sub_category_name }}</td>
-                                <td class="text-right">{{ item.stock }}</td>
-                                <td>{{ item.color }}</td>
-                                <td class="text-right">&#8358;{{ item.cost_price }}</td>
-                                <td class="text-right">&#8358;{{ item.selling_price }}</td>
-                                <td class="hidden">{{ item.description }}</td>
+                        {% for merchant in merchants %}
+                            <tr id="{{ merchant.id }}">
+                                <td>{{ merchant.createdAt | date('d M Y') }}</td>
+                                <td>{{ merchant.name }}</td>
+                                <td>{{ merchant.address }}</td>
+                                <td>{{ merchant.email }}</td>
+                                <td>{{ merchant.phone }}</td>
+                                <td class="text-right">{{ merchant.item }}</td>
+                                <td class="text-right">{{ merchant.current_orders }}</td>
+                                <td class="text-right">{{ merchant.all_orders }}</td>
                                 <td class="opt-icons">  
-                                    <a href='' class='edit-item btn btn-default btn-xs' data-toggle='tooltip' title='Edit Item'><i class='fa fa-pencil fa-lg'></i></a>                                                                        
-                                    <a href='/item/{{ item.id }}' class='btn btn-info btn-xs' data-toggle='tooltip' title='View Item'><i class='fa fa-eye fa-lg'></i></a>
-                                    <a href='' class='delete-item btn btn-danger btn-xs' data-toggle='tooltip' title='Remove Item'><i class='fa fa-trash fa-lg'></i></a>
+                                    <a href='' class='edit-item btn btn-default btn-xs' data-toggle='tooltip' title='Edit Merchant'><i class='fa fa-pencil fa-lg'></i></a>                                                                        
+                                    <a href='' class='delete-item btn btn-danger btn-xs' data-toggle='tooltip' title='Delete Merchant'><i class='fa fa-trash fa-lg'></i></a>
                                 </td>
                               </tr>
                           {% endfor %}    
@@ -72,28 +69,13 @@
     </div>
   </div>
   
-  {% include 'inventory-modal.swig' %}
-  {% include 'edit-inventory-modal.swig' %}
+  {% include 'merchant-modal.swig' %}
 {% endblock %}
 
 {% block scriptTag %}
    <script src="/js/plugins/datatables.min.js"></script>
 {% endblock %}
 {% block script %}
-$(".category").change(function() {
-  var category_id = $(this).find("option:selected").val();
-  var $parent = $(this).parents('.modal-body');
-  $.get('/sub-category/get-sub', {'category_id': category_id }, function(d) {
-      if (d.status.trim() == 'success') {
-          var opt = "<option value=''>-- Select Sub Category --</option>";
-          $.each(d.sub_cat, function(i, val) {
-              opt += "<option value='" + val.id + "'>" + val.sub_category_name + "</option>";
-          });
-          $parent.find(".sub-category").html(opt);
-      }
-  });
-});
-
 
 $(".edit-item").click(function(e) { 
     e.preventDefault();
@@ -127,9 +109,9 @@ $(".edit-item").click(function(e) {
     $("#editInventoryModal").modal();
 });
 
-$(".delete-item").click(function(e) {
+$(".delete-merchant").click(function(e) {
     e.preventDefault();
-    if (confirm("Are you sure you want to delete this item?")) {
+    if (confirm("Are you sure you want to delete this merchant?")) {
         var id = $(this).parents('tr').attr('id');
         $.get('/product/delete/' + id);
     }

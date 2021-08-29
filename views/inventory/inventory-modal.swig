@@ -26,6 +26,18 @@
                 </div>
             </div>
           </div>
+           <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <select name="merchant" class="form-control merchant" id="merchant" required>
+                        <option value="">-- Select Merchant --</option>
+                        {% for merchant in merchants %}
+                            <option value="{{ merchant.id }}">{{ merchant.name }}</option>
+                        {% endfor %}  
+                    </select>
+                </div>
+            </div>
+          </div>  
           <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
@@ -52,23 +64,23 @@
                       <input type="text" class="form-control" name="stock" placeholder="Available quantity" />
                   </div>
                   <div class="col-md-6">
-                      <label>Color</label>
-                      <input type="text" class="form-control" name="color" placeholder="Item color" />
+                      <label>Price</label>
+                      <input type="text" class="form-control" name="price" placeholder="Selling Price" />
                   </div>
               </div>
           </div>
-          <div class="form-group">
+          <!--<div class="form-group">
               <div class="row">
                   <div class="col-md-6">
                       <label>Cost</label>
                       <input type="text" class="form-control" name="cost" placeholder="Cost of Purchase" />
                   </div>
                   <div class="col-md-6">
-                      <label>Price</label>
-                      <input type="text" class="form-control" name="price" placeholder="Selling Price" />
+                      <label>Color</label>
+                      <input type="text" class="form-control" name="color" placeholder="Item color" />
                   </div>
               </div>
-          </div>
+          </div>-->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default close-modal" data-dismiss="modal">

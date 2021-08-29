@@ -11,45 +11,49 @@ module.exports = {
         product_name: {
             type: 'string'
         },
-        
+
         description: {
             type: 'string'
         },
-        
+
+        merchant: {
+            model: 'merchant'
+        },
+
         category: {
             model: 'category'
         },
-        
+
         sub_category: {
             model: 'subcategory'
         },
-        
+
         stock: {
             type: 'integer'
         },
-        
+
         color: {
             type: 'string'
         },
-        
+
         cost_price: {
             type: 'float'
         },
-        
+
         selling_price: {
             type: 'float'
         },
-        
+
         productphotos: {
             collection: 'productphoto',
             via: 'product'
         },
-        
+
         keyfeatures: {
             collection: 'keyfeatures',
             via: 'product'
         },
-        
+
         removed: {
             type: 'boolean',
             defaultsTo: 'false'

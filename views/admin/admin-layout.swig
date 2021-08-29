@@ -78,6 +78,9 @@
                     <a href="/admin/dashboard" class="page-link"><i class="fa fa-dashboard fa-lg fa-fw"></i> <span class="nav-label">Dashboards</span></a>
                 </li>
                 <li class="">
+                    <a href="/merchants/show-all"><i class="fa fa-users fa-lg fa-fw"></i> <span class="nav-label">Merchants</span></a>
+                </li>
+                <li class="">
                     <a href="/inventory/show-all"><i class="fa fa-cubes fa-lg fa-fw"></i> <span class="nav-label">Inventory</span></a>
                 </li>
                 <li>

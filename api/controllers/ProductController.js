@@ -6,35 +6,38 @@
  */
 
 module.exports = {
-    getAll: function(req, res) {
-        Product.find({ removed: 'false' }).populate('category').populate('sub_category').sort({ createdAt: 'desc'}).exec(function(err, products) {
-            if (err) return res.badRequest(err);
-            Category.find({ removed: 'false' }).exec(function(err, cat) {
-                if (err) console.log(err);
-                return res.view('inventory/index', { items: products, categories: cat });
-            });
-        });
+    async getAll(req, res) {
+        try {
+            const [items, categories, merchants] = await Promise.all([
+                Product.find({ removed: 'false' }).populate('category').populate('sub_category').sort({ createdAt: 'desc' }),
+                Category.find({ removed: 'false' }),
+                Merchant.find({ status: 'active' })
+            ]);
+
+            return res.view('inventory/index', { items, categories, merchants });
+        } catch (err) {
+            res.serverError(err);
+        }
     },
-    
-    addNew: function(req, res) {
+
+    addNew: function (req, res) {
         var q = req.param;
         var data = {
             product_name: q('product_name'),
             description: q('description'),
+            merchant: q('merchant'),
             category: q('category_id'),
             sub_category: q('sub_category_id'),
             stock: q('stock'),
-            color: q('color'),
-            cost_price: q('cost'),
             selling_price: q('price'),
         };
-        Product.create(data).exec(function(err, item) {
+        Product.create(data).exec(function (err, item) {
             if (err) return res.badRequest(err);
             return res.redirect('/item/' + item.id);
         });
     },
-    
-    update: function(req, res) {
+
+    update: function (req, res) {
         var q = req.param;
         var data = {
             product_name: q('product_name'),
@@ -46,15 +49,15 @@ module.exports = {
             cost_price: q('cost'),
             selling_price: q('price'),
         };
-        Product.update({ id: q('product_id') }, data).exec(function(err) {
+        Product.update({ id: q('product_id') }, data).exec(function (err) {
             if (err) return res.badRequest(err);
             return res.redirect('/item/' + q('product_id'));
         });
     },
-    
-    showItem: function(req, res) {
+
+    showItem: function (req, res) {
         var id = req.param('id');
-        Product.findOne({ id: id }).populate('productphotos').populate('keyfeatures').exec(function(err, item) {
+        Product.findOne({ id: id }).populate('productphotos').populate('keyfeatures').exec(function (err, item) {
             if (err) res.badRequest(err);
             // process product photos
             if (!_.isUndefined(item)) {
@@ -70,12 +73,12 @@ module.exports = {
             }
         });
     },
-    
-    deleteProduct: function(req, res) {
+
+    deleteProduct: function (req, res) {
         var id = req.param('id');
-        Product.update({id: id }, { removed: true }).exec(function(err) {
-           if (err) return console.log(err);
-           return res.redirect('/inventory/show-all');
+        Product.update({ id: id }, { removed: true }).exec(function (err) {
+            if (err) return console.log(err);
+            return res.redirect('/inventory/show-all');
         });
     }
 };

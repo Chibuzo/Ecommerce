@@ -277,7 +277,7 @@ p.m_5 {
                   <div class="item_name hidden">{{ item.product_name }}</div>
                   <div class="item_cid hidden">{{ item.id }}</div>
                 <h4>{{ item.product_name }}</h4>
-                <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.selling_price | formatCurrency }}</span></a></p>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.price }}</span></a></p>
               </div>
             </div>
           </div>
@@ -300,7 +300,7 @@ p.m_5 {
                   <div class="item_name hidden">{{ item.product_name }}</div>
                   <div class="item_cid hidden">{{ item.id }}</div>
                 <h4>{{ item.product_name }}</h4>
-                <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.selling_price | formatCurrency }}</span></a></p>
+                <p><a class="item_add" href="#"><i></i> <span class=" item_price">&#8358;{{ item.price }}</span></a></p>
               </div>
             </div>
           </div>

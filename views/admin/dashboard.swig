@@ -42,7 +42,7 @@
                     <td>{{ order.user.fullname }}</td>
                     <td>{{ order.user.phone }}</td>
                     <td class="text-right">{{ order.item_count }}</td>
-                    <td class="text-right">&#8358;{{ order.total | formatCurrency }}</td>
+                    <td class="text-right">&#8358;{{ order.total }}</td>
                   </tr>
                 {% endfor %}  
               </tbody>
@@ -74,7 +74,7 @@
                     <td>{{ pay.user.fullname }}</td>
                     <td>{{ pay.user.phone }}</td>
                     <td>{{ pay.order }}</td>
-                    <td class="text-right">&#8358;{{ pay.amount | formatCurrency }}</td>
+                    <td class="text-right">&#8358;{{ pay.amount }}</td>
                   </tr>
                 {% endfor %}  
               </tbody>
