@@ -5,32 +5,45 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-const Product = require("../models/Product");
-const ProductService = require("../services/ProductService");
 
 module.exports = {
     async index(req, res) {
         try {
-            const products = await ProductService.fetchProducts();
-            return res.view('products/index', { products });
+            const [products, categories] = await Promise.all([
+                ProductService.fetchProducts(),
+                ProductService.fetchCategories(req)
+            ]);
+            return res.view('products/index', { products, categories, popular_categories: categories.length = 6 });
         } catch (err) {
             return res.badRequest(err);
         }
     },
 
-    itemDisplay: function (req, res) {
-        Product.findOne({ id: req.param('id') }).populate('productphotos').populate('keyfeatures').exec(function (err, item) {
-            if (err) return res.badRequest(err);
-            return res.view('products/view-item', { item: item });
-        });
+    async itemDisplay(req, res) {
+        try {
+            const [product, categories] = await Promise.all([
+                ProductService.fetchProduct(req.params.id),
+                ProductService.fetchCategories(req)
+            ]);
+
+            if (!product) throw new Error('Item not found!');
+            return res.view('products/view-item', { item: product, categories });
+        } catch (err) {
+            return res.badRequest(err);
+        }
     },
 
-    findByCategory: function (req, res) {
-        var id = req.param('id');
-        Product.find({ category: id, removed: false }).populate('productphotos').exec(function (err, items) {
-            if (err) return res.badRequest(err);
-            return res.view('products/index', { products: items });
-        });
+    async findByCategory(req, res) {
+        try {
+            const categoryId = req.param('id');
+            const [products, categories] = await Promise.all([
+                Product.find({ category: categoryId, removed: false }).populate('productphotos'),
+                ProductService.fetchCategories(req)
+            ]);
+            return res.view('products/index', { products, categories });
+        } catch (err) {
+            return res.badRequest(err);
+        }
     }
 };
 

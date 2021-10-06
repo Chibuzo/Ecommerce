@@ -226,7 +226,7 @@
                 Haha!
             </div>
             <div>
-                <strong>Copyright</strong> Kentzville &copy;
+                <strong>Copyright</strong> Shopping Answer &copy;
             </div>
         </div>
 

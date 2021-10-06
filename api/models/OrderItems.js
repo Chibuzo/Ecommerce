@@ -11,15 +11,15 @@ module.exports = {
         order: {
             model: 'order'
         },
-        
+
         product: {
             model: 'product'
         },
-        
-        qty: {
+
+        quantity: {
             type: 'integer'
         },
-        
+
         unit_price: {
             type: 'float'
         }

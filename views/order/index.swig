@@ -58,9 +58,9 @@
                               <td>{{ order.delivery }}</td>
                               <td>{{ order.payment_method }}</td>
                               <td>{{ payment_status }}</td>
-                              <td class="text-right hidden">&#8358;{{ order.total | formatCurrency }}</td>
-                              <td class="text-right hidden">&#8358;{{ order.delivery_fee | formatCurrency }}</td>
-                              <td class="text-right">&#8358;{{ (order.total) | formatCurrency }}</td>
+                              <td class="text-right hidden">&#8358;{{ order.total }}</td>
+                              <td class="text-right hidden">&#8358;{{ order.delivery_fee }}</td>
+                              <td class="text-right">&#8358;{{ (order.total) }}</td>
                               <td class="text-center">{{ order.status }}</td>
                               <td class="opt-icons dropdown">
                                   <a href="#orderDetailsModal" class="btn btn-info btn-xs view-order-items" data-toggle="modal"><i data-toggle="tooltip" title="View order details" class="fa-eye fa"></i></a>

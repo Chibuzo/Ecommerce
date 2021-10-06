@@ -56,7 +56,7 @@ module.exports = {
                         const zoomphoto = path.resolve(sails.config.appPath, 'assets/product_photos') + '/' + filename;
                         const zoomTemp = path.resolve(sails.config.appPath, '.tmp/public/product_photos') + '/' + filename;
                         photo
-                            .resize(245, Jimp.AUTO)
+                            .resize(700, 700)
                             .quality(90)
                             .write(zoomphoto);
 
@@ -72,7 +72,7 @@ module.exports = {
                         const browseTemp = path.resolve(sails.config.appPath, '.tmp/public/product_photos/browse') + '/' + filename;
 
                         photo
-                            .resize(Jimp.AUTO, 200)
+                            .resize(400, 400)
                             .quality(90)
                             .write(browse);
 
@@ -87,7 +87,7 @@ module.exports = {
                         const thumbTemp = path.resolve(sails.config.appPath, '.tmp/public/product_photos/thumbnail') + '/' + filename;
 
                         photo
-                            .resize(89, 89)
+                            .resize(100, 100)
                             .quality(90)
                             .write(thumbphoto);
 

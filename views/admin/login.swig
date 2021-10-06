@@ -22,9 +22,9 @@
 	</section>
 {% endblock %}
 
-{% block script %}
-	{#<script>#}
-
+{% block scriptTag %}
+<script>
+$(document).ready(function() {
 	$("#signin").submit(function(e) {
 		e.preventDefault();
 		var $this = $(this);
@@ -40,5 +40,6 @@
 			$this.find('button').html("<i class='fa fa-sign-in fa-lg'></i>&nbsp; SIGN IN").prop('disabled', false);
 		}, 'JSON');
 	});
-	{#</script>#}
+});
+</script>
 {% endblock %}

@@ -8,72 +8,26 @@ var Emailaddresses = require('machinepack-emailaddresses');
 var Passwords = require('machinepack-passwords');
 
 module.exports = {
-    signup: function(req, res) {
-        if (_.isUndefined(req.param('email'))) {
-            return res.badRequest('An email address is required!');
-        }
+    signup: function (req, res) {
 
-        if (_.isUndefined(req.param('password')) || req.param('password').length < 6) {
-            return res.badRequest('A password is required, and must be aleast 6 characters');
-        }
-
-        // validate email and password
-        Emailaddresses.validate({
-            string: req.param('email')
-        }).exec({
-            error: function(err) {
-                return res.serverError(err);
-            },
-            invalid: function() {
-                return res.badRequest('Doesn\'t look like an email address to me!');
-            },
-            success: function() {
-                Passwords.encryptPassword({
-                    password: req.param('password'),
-                }).exec({
-                    error: function(err) {
-                        return res.serverError(err);
-                    },
-                    success: function(encryptedPassword) {
-                        // collect ALL signup data
-                        var data = {
-                            fullname: req.param('fullname'),
-                            email: req.param('email'),
-                            phone: req.param('phone'),
-                            password: encryptedPassword,
-                        };
-
-                        User.create(data).exec(function(err) {
-                            if (err) {
-                                if (err.invalidAttributes && err.invalidAttributes.email && err.invalidAttributes.email[0] && err.invalidAttributes.email[0].rule === 'unique') {
-                                    return res.json(200, { status: '02', msg: 'Email address is already taken, please try another one.' });
-                                }
-                                return res.json(501, { status: '00', msg: err }); // couldn't be completed
-                            }
-                            return res.json(200, { status: '01' });
-                        });
-                    }
-                });
-            }
-        });
     },
 
     //activateAccount: function(req, res) {
     //
     //},
-    
-    findAccount: function(req, res) {
-        User.findOne({ email: req.param('email') }).exec(function(err, foundUser) {
-           if (err) return res.json(200, { status: 'Err', msg: err });
-           if (!foundUser) return res.json(200, { status: 'Err', msg : 'User not found' });
-           return res.json(200, { status: 'Found' });
+
+    findAccount: function (req, res) {
+        User.findOne({ email: req.param('email') }).exec(function (err, foundUser) {
+            if (err) return res.json(200, { status: 'Err', msg: err });
+            if (!foundUser) return res.json(200, { status: 'Err', msg: 'User not found' });
+            return res.json(200, { status: 'Found' });
         });
     },
 
-    signin: function(req, res) {
-        User.findOne({ email: req.param('email') }).exec(function(err, foundUser) {
+    signin: function (req, res) {
+        User.findOne({ email: req.param('email') }).exec(function (err, foundUser) {
             if (err) return res.json(200, { status: 'Err', msg: err });
-            if (!foundUser) return res.json(200, { status: 'Err', msg : 'User not found' });
+            if (!foundUser) return res.json(200, { status: 'Err', msg: 'User not found' });
 
             Passwords.checkPassword({
                 passwordAttempt: req.param('l_password'),
@@ -83,7 +37,7 @@ module.exports = {
                     return res.json(200, { status: 'Err', msg: err });
                 },
                 incorrect: function () {
-                    return res.json(200, { status: 'Err', msg : 'User not found' });
+                    return res.json(200, { status: 'Err', msg: 'User not found' });
                 },
                 success: function () {
                     if (foundUser.deleted) {
@@ -91,7 +45,7 @@ module.exports = {
                     }
 
                     if (foundUser.banned) {
-                        return res.json(200, { status: 'Err', msg: "'Your account has been banned, most likely for violation of the Terms of Service. Please contact us.'"});
+                        return res.json(200, { status: 'Err', msg: "'Your account has been banned, most likely for violation of the Terms of Service. Please contact us.'" });
                     }
                     req.session.userId = foundUser.id;
                     req.session.fname = foundUser.fullname;
@@ -103,33 +57,33 @@ module.exports = {
         });
     },
 
-    dashboard: function(req, res) {
+    dashboard: function (req, res) {
         if (!req.session.userId) {
-            return res.view ('user/signin');
+            return res.view('user/signin');
         }
-        User.findOne({ id: req.session.userId }).populate('contacts').exec(function(err, user) {
+        User.findOne({ id: req.session.userId }).populate('contacts').exec(function (err, user) {
             if (err) {
                 return res.negotiate(err);
             }
             return res.view('user/dashboard', { user: user });
         });
     },
-    
-    updateDetails: function(req, res) {
+
+    updateDetails: function (req, res) {
         var q = req.param;
         var data = {
             phone: q('phone'),
             address: q('address'),
             user: req.session.userId
         };
-        User.update({ id: q('user_id') }, { fullname: q('fullname'), phone: q('phone') }).exec(function() {});
-        UserContact.findOne({ id: q('contact_id') }).exec(function(err, cn) {
+        User.update({ id: q('user_id') }, { fullname: q('fullname'), phone: q('phone') }).exec(function () { });
+        UserContact.findOne({ id: q('contact_id') }).exec(function (err, cn) {
             if (err) { return res.json(200, { status: 'error', msg: err }); }
             if (cn) {
-                UserContact.update({ id: q('contact_id') }, data).exec(function() {});
+                UserContact.update({ id: q('contact_id') }, data).exec(function () { });
             } else {
-                UserContact.create(data).exec(function(err) {
-                  if (err) console.log(err);
+                UserContact.create(data).exec(function (err) {
+                    if (err) console.log(err);
                 });
             }
         });
@@ -150,8 +104,8 @@ module.exports = {
         });
     },
 
-    profile: function(req, res) {
-        User.findOne(req.session.userId, function(err, _user) {
+    profile: function (req, res) {
+        User.findOne(req.session.userId, function (err, _user) {
             return res.view('user/profile', { user: _user, acc: account });
         });
     },
@@ -162,7 +116,7 @@ module.exports = {
             email: req.param('email'),
             phone: req.param('phone')
         };
-        User.update({ id: req.session.userId }, udata ).exec(function(err) {
+        User.update({ id: req.session.userId }, udata).exec(function (err) {
             if (err) {
                 return res.negotiate(err);
             }

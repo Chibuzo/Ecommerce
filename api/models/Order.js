@@ -43,6 +43,10 @@ module.exports = {
 
         delivery_fee: {
             type: 'float'
+        },
+
+        delivery_note: {
+            type: 'text'
         }
     }
 };

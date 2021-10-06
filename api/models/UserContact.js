@@ -11,11 +11,19 @@ module.exports = {
         phone: {
             type: 'string'
         },
-        
+
         address: {
             type: 'string'
         },
-        
+
+        city: {
+            type: 'string'
+        },
+
+        state: {
+            type: 'string'
+        },
+
         user: {
             model: 'user'
         }

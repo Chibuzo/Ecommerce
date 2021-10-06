@@ -69,6 +69,7 @@ assets/product_photos/*
 
 node_modules
 bower_components
+assets/product_photos
 
 
 

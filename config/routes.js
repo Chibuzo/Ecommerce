@@ -84,7 +84,9 @@ module.exports.routes = {
 
     'GET /checkout': 'CheckoutController.checkoutPage',
 
-    'POST /checkout/cart-items': 'CheckoutController.confirmationPage',
+    'POST /order/save': 'OrderController.save',
+
+    'GET /confirmation': 'CheckoutController.confirmationPage',
 
     'GET /order/show-all': 'OrderController.showAll',
 
