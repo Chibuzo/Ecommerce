@@ -4,17 +4,12 @@
  * @description :: Server-side logic for managing Users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var Emailaddresses = require('machinepack-emailaddresses');
-var Passwords = require('machinepack-passwords');
+const Passwords = require('machinepack-passwords');
 
 module.exports = {
     signup: function (req, res) {
-
+        return UserService.create(req.body);
     },
-
-    //activateAccount: function(req, res) {
-    //
-    //},
 
     findAccount: function (req, res) {
         User.findOne({ email: req.param('email') }).exec(function (err, foundUser) {
@@ -30,7 +25,7 @@ module.exports = {
             if (!foundUser) return res.json(200, { status: 'Err', msg: 'User not found' });
 
             Passwords.checkPassword({
-                passwordAttempt: req.param('l_password'),
+                passwordAttempt: req.param('password'),
                 encryptedPassword: foundUser.password
             }).exec({
                 error: function (err) {
@@ -41,32 +36,37 @@ module.exports = {
                 },
                 success: function () {
                     if (foundUser.deleted) {
-                        return res.json(200, { status: 'Err', msg: "'Your account has been deleted. Please visit http://cpbit.com/restore to restore your account.'" });
+                        return res.json(200, { status: 'Err', msg: "'Your account has been deleted. Please visit http://shoppinganswer.com/restore to restore your account.'" });
                     }
 
                     if (foundUser.banned) {
                         return res.json(200, { status: 'Err', msg: "'Your account has been banned, most likely for violation of the Terms of Service. Please contact us.'" });
                     }
-                    req.session.userId = foundUser.id;
-                    req.session.fname = foundUser.fullname;
                     req.session.admin = foundUser.admin;
-                    var user_type = foundUser.admin ? 'admin' : 'user';
-                    return res.json(200, { status: 'Ok', user_type: user_type });
+                    const user_type = foundUser.admin ? 'admin' : 'user';
+                    req.session.user = foundUser;
+                    return res.json(200, { status: 'success', user_type: user_type });
                 }
             });
         });
     },
 
-    dashboard: function (req, res) {
-        if (!req.session.userId) {
-            return res.view('user/signin');
+    async showAaccountPage(req, res) {
+        const categories = await ProductService.fetchCategories(req);
+        return res.view('user/account', { categories });
+    },
+
+    async dashboard(req, res) {
+        if (!req.session.user) {
+            return res.view('user/account');
         }
-        User.findOne({ id: req.session.userId }).populate('contacts').exec(function (err, user) {
-            if (err) {
-                return res.negotiate(err);
-            }
-            return res.view('user/dashboard', { user: user });
-        });
+        const [user, categories, orders] = await Promise.all([
+            User.findOne({ id: req.session.user.id }).populate('contacts'),
+            ProductService.fetchCategories(req),
+            Order.find({ user: req.session.user.id })
+        ]);
+
+        return res.view('user/dashboard', { user, categories, orders });
     },
 
     updateDetails: function (req, res) {

@@ -17,18 +17,23 @@
 </div>
 <div class="checkout block">
     <div class="container">
-        <div class="row">
-            <div class="col-12 mb-3">
-                <div class="alert alert-lg alert-primary">Returning customer? <a href="#">Click here to
-                        login</a></div>
-                </div>
-            </div>    
-        <div>
+        {% if !user %}
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <div class="alert alert-lg alert-primary">Returning customer? <a href="#loginModal" data-toggle="modal">Click here to
+                            login</a></div>
+                    </div>
+                </div>    
+            <div>
+        {% else %}  
+            <input type="hidden" id="user-email" value="{{ user.email }}" />
+        {% endif %}
 
         <form id="order-form" method="post">
             <div class="row">    
                 <div class="col-12 col-lg-6 col-xl-7">
                     <div class="card mb-lg-0">
+                        {% if !user %}
                         <div class="card-body">
                             <h3 class="card-title">Your details</h3>
                             <div class="form-row">
@@ -76,6 +81,7 @@
                             </div>
                             
                         </div>
+                        {% endif %}
                         <div class="card-divider"></div>
                         <div class="card-body">
                             <h4>Delivery Info</h4>
@@ -198,11 +204,16 @@
         </form>    
     </div>
 </div>
-{% endblock %}            
+
+{% include "user/login-modal.swig"  %}
+{% endblock %}   
+
 
 {% block scriptTag %}
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
     const items = cartLS.list();
+    const total = cartLS.total();
 
     $("#order-form").submit(function(e) {
         e.preventDefault();
@@ -217,19 +228,71 @@
             return false;
         }
 
-        if ($("#password").val() !== $("#verify-password").val()) {
-            $(".alert-danger").html("<i class='fa fa-info-circle fa-lg'></i> &nbsp; Password doesn't match").removeClass("d-none");
-            return false;
-        }
+        // if ($("#password").val() !== $("#verify-password").val()) {
+        //     $(".alert-danger").html("<i class='fa fa-info-circle fa-lg'></i> &nbsp; Password doesn't match").removeClass("d-none");
+        //     return false;
+        // }
 
-        $.post('/order/save', $(this).serialize() + '&items=' + items, function(d) {
+        const formData = $(this).serialize() + '&items=' + JSON.stringify(items);
+        if ($("input[name='checkout_payment_method']:checked").val() == 'cash') {
+            postOrder(formData);
+        } else if ($("input[name='checkout_payment_method']:checked").val() == 'online') {
+            if (cartLS.list().length) postOrder(formData);
+            const email = $("input[name='email']").val() || $("#user-email").val();
+            console.log(email)
+            payWithPaystack(email, parseInt(total, 10) * 100);
+        }
+    });
+
+    $("#login-form").submit(function(e) {
+        e.preventDefault();
+        $.post('/user/signin', $(this).serialize(), function(d) {
             if (d.status.trim() == 'success') {
-                location.replace('/confirmation');
+                location.reload();
             }
         });
-
     });
 
     listOrderItems(items);
+
+function postOrder(formData) {
+    $.post('/order/save', formData, function(d) {
+        if (d.status.trim() == 'success') {
+            cartLS.destroy();
+            if (d.data.payment_method.trim() == 'cash') {
+                location.replace('/confirmation?q=c');
+            }
+            // } else if (d.data.payment_method.trim() == 'online') {
+            //     const { email, total_amount } = d.data;
+            //     payWithPaystack(email, total_amount);
+            // }
+        }
+    });
+}
+
+
+function payWithPaystack(email, amount) {
+    var handler = PaystackPop.setup({
+        // key: 'pk_live_b3743bc7dcaf617dbc44185234fd260f237d3846',
+        key: 'pk_test_1af52eb927ab26800c2a1fd2a705f9823375333b',
+        email,
+        amount,
+        currency: "NGN",
+        callback: function(response){
+            const { reference, status } = response;
+
+            // ajax call to send email
+            $.post('/confirmpayment', { reference, status, amount }, function(d) {
+                if (d.status.trim() === 'success') {
+                    location.replace('/confirmation?q=o');
+                }
+            }, 'JSON');
+        },
+        onClose: function(){
+            alert('Payment cancelled');
+        }
+    });
+    handler.openIframe();
+}
 </script>
 {% endblock %}

@@ -11,17 +11,26 @@ module.exports = {
         order: {
             model: 'order'
         },
-        
+
         user: {
             model: 'user'
         },
-        
+
         amount: {
             type: 'float'
         },
-        
+
         payment_method: {
             type: 'string'
+        },
+
+        reference: {
+            type: 'string'
+        },
+
+        status: {
+            type: 'string',
+            defaultsTo: 'Pending'
         }
     }
 };

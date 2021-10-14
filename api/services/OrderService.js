@@ -8,6 +8,8 @@ const saveOrder = async ({ userId, payment_method, delivery_opt, shipping, items
         items.push({ product: item.id, quantity: item.quantity, unit_price: item.price });
     });
 
+    total += shipping;
+
     const order = await Order.create({
         user: userId,
         item_count,
@@ -18,7 +20,7 @@ const saveOrder = async ({ userId, payment_method, delivery_opt, shipping, items
         note
     });
 
-    await Promise.all(items.map(item => OrderItems.create({ ...item, order: order.id })));
+    await Promise.all(items.map(async item => OrderItems.create({ ...item, order: order.id })));
     return order;
 }
 

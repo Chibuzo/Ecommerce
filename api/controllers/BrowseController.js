@@ -5,15 +5,18 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+const ProductService = require("../services/ProductService");
+
 
 module.exports = {
     async index(req, res) {
         try {
-            const [products, categories] = await Promise.all([
+            const [products, categories, newArrivals] = await Promise.all([
                 ProductService.fetchProducts(),
-                ProductService.fetchCategories(req)
+                ProductService.fetchCategories(req),
+                ProductService.fetchNewArrivals()
             ]);
-            return res.view('products/index', { products, categories, popular_categories: categories.length = 6 });
+            return res.view('products/index', { products, newArrivals, categories, popular_categories: categories.length = 6 });
         } catch (err) {
             return res.badRequest(err);
         }

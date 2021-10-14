@@ -6,17 +6,19 @@
  */
 
 module.exports = {
-    cartPage: function (req, res) {
-        return res.view('cart');
+    async cartPage(req, res) {
+        const categories = await ProductService.fetchCategories(req);
+        return res.view('cart', { categories });
     },
 
-    checkoutPage: function (req, res) {
-
-        return res.view('checkout');
+    async checkoutPage(req, res) {
+        const categories = await ProductService.fetchCategories(req);
+        return res.view('checkout', { user: req.session.user, categories });
     },
 
-    confirmationPage: function (req, res) {
-        return res.view('confirmation');
+    async confirmationPage(req, res) {
+        const categories = await ProductService.fetchCategories(req);
+        return res.view('confirmation', { categories });
     }
 };
 

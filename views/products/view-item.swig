@@ -92,7 +92,7 @@
                                 <div class="product__actions-item product__actions-item--addtocart">
                                     <button type="button"
                                         class="btn btn-primary btn-lg"
-                                        onClick="addItemToCart({{ item.id }}, '{{ item.product_name }}', {{ item.unformatted_price }}, '{{ item.photo }}')">Add to cart</button>
+                                        onClick="addItemToCart({{ item.id }}, '{{ item.product_name }}', {{ item.unformatted_price }}, '{{ item.photo }}', {{ item.merchant }}')">Add to cart</button>
                                 </div>
                             </div>
                         </div>

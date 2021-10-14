@@ -8,6 +8,10 @@
 module.exports = {
 
     attributes: {
+        merchant: {
+            model: 'merchant'
+        },
+
         order: {
             model: 'order'
         },

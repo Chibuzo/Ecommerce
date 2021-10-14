@@ -27,11 +27,9 @@ module.exports.policies = {
     },
 
     UserController: {
-        '*': 'isLoggedIn',
-        signin: true,
-        signup: true,
-        findAccount: true,
-        signout: true
+        // '*': 'isLoggedIn',
+        // account: true,
+        // signout: true
     },
 
     OrderController: {

@@ -50,8 +50,8 @@ function listOrderItems(items) {
     updateOrderSummary();
 }
 
-function addItemToCart(id, name, price, thumb) {
-    cartLS.add({ id, name, price, thumb });
+function addItemToCart(id, name, price, thumb, merchant) {
+    cartLS.add({ id, name, price, thumb, merchant });
     updateCartIndicator();
 }
 

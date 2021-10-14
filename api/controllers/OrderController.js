@@ -16,16 +16,22 @@ module.exports = {
     async save(req, res) {
         try {
             const { checkout_payment_method: payment_method, delivery_opt, note, shipping = 500, items = [{}] } = req.body;
-            const { fname, lname, email, phone, city, state, address, password } = req.body;
 
             const order_items = JSON.parse(items);
             if (Array.isArray(order_items) && order_items.length < 1) throw Error('No items found');
 
-            const user = req.session.userId ?? await UserService.create({ fname, lname, email, phone, password });
-            const userId = typeof user === "object" ? user.id : user;
-            await UserContact.create({ phone, city, state, address, user: userId });
-            await OrderService.saveOrder({ userId, payment_method, delivery_opt, shipping, items: order_items, note });
-            return res.json({ status: 'success' });
+            let user, customerEmail;
+            if (!req.session.user) {
+                const { fname, lname, email, phone, city, state, address, password } = req.body;
+                customerEmail = email
+                user = await UserService.create({ fname, lname, email, phone, password });
+                await UserContact.create({ phone, city, state, address, user: user.id });
+            }
+            const userId = user && user.id || req.session.user.id;
+            customerEmail = customerEmail || req.session.user.email;
+
+            const order = await OrderService.saveOrder({ userId, payment_method, delivery_opt, shipping, items: order_items, note });
+            return res.json({ status: 'success', data: { payment_method, email: customerEmail, total_amount: order.total } });
         } catch (err) {
             return res.json({ status: 'error', message: err.message });
         }

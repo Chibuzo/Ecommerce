@@ -1,5 +1,10 @@
 {% extends '../theme.swig' %}
 {% set title = 'Dashboard' %}
+
+{% block category %}
+    <div class="departments" data-departments-fixed-by="">
+{% endblock %}
+
 {% block body %}
 <style>
 .inner-div {
@@ -46,6 +51,17 @@ address {
 }
 </style>
 
+<div class="page-header">
+    <div class="page-header__container container">
+        <div class="page-header__breadcrumb">
+            
+        </div>
+        <div class="page-header__title">
+            <h1>My Dashboard</h1>
+        </div>
+    </div>
+</div>
+<div class="block">
 <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -101,15 +117,38 @@ address {
       </div>
       <div class="col-md-6">
         <div class="inner-div">
-          <h4>Pending Order</h4>
-        </div>
+            <h4>Pending Order</h4>
+            <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Items</th>
+                    <th>Delivery</th>
+                    <th>Payment</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>    
+                    <td>{{ order.createdAt | date('d/m/y') }}</td>
+                    <td>{{ order.item_count }}</td>
+                    <td>{{ order.delivery }}</td>
+                    <td>{{ order.payment_method }}</td>
+                    <td>{{ order.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
+        </div>    
       </div>
     </div>
 </div>
-
+</div>
 {% endblock %}
 
-{% block script %}
+{% block scriptTag %}
+<script>
 $('#edit').click(function(e) {
     e.preventDefault();
 
@@ -150,5 +189,5 @@ $('#form-edit').submit(function(e) {
             $('#menu').fadeIn();
         });
     });
-
+</script>
 {%  endblock %}

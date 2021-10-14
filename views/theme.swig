@@ -5,16 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="format-detection" content="telephone=no">
-    <title>Stroyka</title>
+    <title>ShoppingAnswer - {{ title }}</title>
     <link rel="icon" type="image/png" href="/images/favicon.png"><!-- fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i"><!-- css -->
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/css/style.css"><!-- js -->
     <link rel="stylesheet" href="/css/all.min.css"><!-- font - stroyka -->
     <link rel="stylesheet" href="/fonts/stroyka/stroyka.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-97489509-6"></script>
-    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-97489509-6');</script>
 </head>
 
 <body>
@@ -38,11 +37,11 @@
             </div>
             <div class="mobilemenu__content">
                 <ul class="mobile-links mobile-links--level--0" data-collapse data-collapse-opened-class="mobile-links__item--open">
-                    <li class="mobile-links__item" data-collapse-item>
+                   <!-- <li class="mobile-links__item" data-collapse-item>
                         <div class="mobile-links__item-title">
                             <a href="/" class="mobile-links__item-link">Home</a>
                         </div>
-                    </li>
+                    </li>-->
                     <li class="mobile-links__item" data-collapse-item>
                         <div class="mobile-links__item-title"><a href="#" class="mobile-links__item-link">Categories</a>
                             <button class="mobile-links__item-toggle" type="button" data-collapse-trigger>
@@ -87,7 +86,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="mobile-links__item" data-collapse-item>
+                    <!--<li class="mobile-links__item" data-collapse-item>
                         <div class="mobile-links__item-title">
                             <a href="/browse" class="mobile-links__item-link">Shop</a>
                         </div>
@@ -96,7 +95,7 @@
                         <div class="mobile-links__item-title">
                             <a href="/contact" class="mobile-links__item-link">Contact Us</a>
                         </div>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
@@ -180,19 +179,8 @@
                     <div class="topbar__container container">
                         <div class="topbar__row float-right">
                             <div class="topbar__item">
-                                <div class="topbar-dropdown"><button class="topbar-dropdown__btn" type="button">My
-                                        Account <svg width="7px" height="5px">
-                                            <use xlink:href="/images/sprite.svg#arrow-rounded-down-7x5"></use>
-                                        </svg></button>
-                                    <div class="topbar-dropdown__body">
-                                        <!-- .menu -->
-                                        <ul class="menu menu--layout--topbar">
-                                            <li><a href="account.html">Login</a></li>
-                                            <li><a href="account.html">Register</a></li>
-                                            <li><a href="#">Orders</a></li>
-                                            <li><a href="#">Addresses</a></li>
-                                        </ul><!-- .menu / end -->
-                                    </div>
+                                <div class="topbar-dropdown"><button class="topbar-dropdown__btn" type="button">
+                                    <a href="/account">My Account</a>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +188,7 @@
                 </div><!-- .topbar / end -->
                 <div class="site-header__middle container">
                     <div class="site-header__logo">
-                        <a href="/"><img src="/images/logo.png" alt="Shopping answer logo" /></a>
+                        <a href="/"><img src="/images/logo.jpg" alt="Shopping answer logo" style="width: 99px" /></a>
                     </div>
                     <div class="site-header__search">
                         <div class="search">
@@ -291,15 +279,15 @@
                                     </div><!-- .departments / end -->
                                 </div><!-- .nav-links -->
                                 <div class="nav-panel__nav-links nav-links">
-                                    <ul class="nav-links__list">
+                                    <ul class="nav-links__list d-none">
                                         <li class="nav-links__item"><a href="/"><span>Home</span></a></li>
                                         <li class="nav-links__item"><a href="/browse-items"><span>Shop</span></a></li>
                                         <li class="nav-links__item"><a href="/contact"><span>Contact Us</span></a></li>
                                     </ul>
                                 </div><!-- .nav-links / end -->
                                 <div class="nav-panel__indicators">
-                                    <div class="indicator indicator--trigger--click">
-                                        <a href="cart.html" class="indicator__button">
+                                    <div class="indicator">
+                                        <a href="/view-cart" class="indicator__button">
                                             <span class="indicator__area">
                                                 <svg width="20px" height="20px">
                                                     <use xlink:href="/images/sprite.svg#cart-20"></use>
@@ -380,102 +368,60 @@
                 <div class="container">
                     <div class="site-footer__widgets">
                         <div class="row">
-                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="col-md-4 col-lg-4">
                                 <div class="site-footer__widget footer-contacts">
                                     <h5 class="footer-contacts__title">Contact Us</h5>
-                                    <div class="footer-contacts__text">Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit. Integer in feugiat lorem. Pellentque ac placerat tellus.</div>
+                                    <div class="footer-contacts__text">Our online shop is open 24/7</div>
                                     <ul class="footer-contacts__contacts">
-                                        <li><i class="footer-contacts__icon fas fa-globe-americas"></i> 715 Fake Street,
-                                            New York 10021 USA</li>
-                                        <li><i class="footer-contacts__icon far fa-envelope"></i> stroyka@example.com
+                                        <li>Shop #1 Hardware tools Opposite
+                                        Union bank APT gate, International tradefair Complex, Badagry Expressway, Lagos</li>
+                                        <li><i class="footer-contacts__icon far fa-envelope"></i> info@shoppinganswer.com
                                         </li>
-                                        <li><i class="footer-contacts__icon fas fa-mobile-alt"></i> (800) 060-0730,
-                                            (800) 060-0730</li>
-                                        <li><i class="footer-contacts__icon far fa-clock"></i> Mon-Sat 10:00pm - 7:00pm
+                                        <li><i class="footer-contacts__icon fas fa-mobile-alt"></i> (+234) 708-6536-634,
+                                            (+234) 806-3351-763</li>
+                                        <li><i class="footer-contacts__icon far fa-clock"></i> Mon-Sat 9:00am - 7:00pm
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-3 col-lg-2">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4 col-lg-4">
                                 <div class="site-footer__widget footer-links">
                                     <h5 class="footer-links__title">Information</h5>
                                     <ul class="footer-links__list">
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">About
-                                                Us</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Delivery
+                                        <li class="footer-links__item"><a href="/services" class="footer-links__link">Our Services
+                                                </a></li>
+                                        <li class="footer-links__item"><a href="/delivery-info" class="footer-links__link">Delivery
                                                 Information</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Privacy
+                                        <li class="footer-links__item"><a href="privacy-policy" class="footer-links__link">Privacy
                                                 Policy</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Brands</a>
-                                        </li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Contact
+                                        <li class="footer-links__item"><a href="/contact" class="footer-links__link">Contact
                                                 Us</a></li>
                                         <li class="footer-links__item"><a href="#"
                                                 class="footer-links__link">Returns</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Site
-                                                Map</a></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-3 col-lg-2">
-                                <div class="site-footer__widget footer-links">
-                                    <h5 class="footer-links__title">My Account</h5>
-                                    <ul class="footer-links__list">
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Store
-                                                Location</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Order
-                                                History</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Wish
-                                                List</a></li>
-                                        <li class="footer-links__item"><a href="#"
-                                                class="footer-links__link">Newsletter</a></li>
-                                        <li class="footer-links__item"><a href="#"
-                                                class="footer-links__link">Specials</a></li>
-                                        <li class="footer-links__item"><a href="#" class="footer-links__link">Gift
-                                                Certificates</a></li>
-                                        <li class="footer-links__item"><a href="#"
-                                                class="footer-links__link">Affiliate</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-12 col-lg-4">
+                            
+                            <div class="col-md-3 col-lg-3">
                                 <div class="site-footer__widget footer-newsletter">
-                                    <h5 class="footer-newsletter__title">Newsletter</h5>
-                                    <div class="footer-newsletter__text">Praesent pellentesque volutpat ex, vitae auctor
-                                        lorem pulvinar mollis felis at lacinia.</div>
-                                    <form action="#" class="footer-newsletter__form"><label class="sr-only"
-                                            for="footer-newsletter-address">Email Address</label> <input type="text"
-                                            class="footer-newsletter__form-input form-control"
-                                            id="footer-newsletter-address" placeholder="Email Address..."> <button
-                                            class="footer-newsletter__form-button btn btn-primary">Subscribe</button>
-                                    </form>
                                     <div class="footer-newsletter__text footer-newsletter__text--social">Follow us on
                                         social networks</div>
                                     <ul class="footer-newsletter__social-links">
                                         <li
                                             class="footer-newsletter__social-link footer-newsletter__social-link--facebook">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                            <a href="#" target="_blank"><i
                                                     class="fab fa-facebook-f"></i></a>
                                         </li>
                                         <li
                                             class="footer-newsletter__social-link footer-newsletter__social-link--twitter">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                            <a href="#" target="_blank"><i
                                                     class="fab fa-twitter"></i></a>
                                         </li>
                                         <li
-                                            class="footer-newsletter__social-link footer-newsletter__social-link--youtube">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i
-                                                    class="fab fa-youtube"></i></a>
-                                        </li>
-                                        <li
                                             class="footer-newsletter__social-link footer-newsletter__social-link--instagram">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i
+                                            <a href="#" target="_blank"><i
                                                     class="fab fa-instagram"></i></a>
-                                        </li>
-                                        <li class="footer-newsletter__social-link footer-newsletter__social-link--rss">
-                                            <a href="https://themeforest.net/user/kos9" target="_blank"><i
-                                                    class="fas fa-rss"></i></a>
                                         </li>
                                     </ul>
                                 </div>

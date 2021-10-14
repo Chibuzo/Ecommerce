@@ -1,7 +1,7 @@
 
 module.exports = {
-    fetchProducts: async () => {
-        const products = await Product.find({ removed: false, stock: { '>': 0 } }).populate('productphotos');
+    fetchProducts: async (criteria = {}) => {
+        const products = await Product.find({ limit: 30, ...criteria, removed: false, stock: { '>': 0 } }).populate('merchant').populate('productphotos');
         return products.map(product => sanitizeProduct(product));
     },
 
@@ -17,6 +17,14 @@ module.exports = {
             .populate('subcategories', { removed: false, select: ['id', 'sub_category_name'] });
         req.session.save();
         return req.session.categories;
+    },
+
+    fetchNewArrivals: async () => {
+        const criteria = {
+            limit: 6,
+            sort: 'createdAt DESC'
+        };
+        return module.exports.fetchProducts(criteria);
     }
 }
 
@@ -31,6 +39,7 @@ function sanitizeProduct(product) {
         unformatted_price: product.selling_price,
         productphotos: product.productphotos,
         photo: product.productphotos[0] && product.productphotos[0].photo_name || 'product.png',
-        keyfeatures: product.keyfeatures || []
+        keyfeatures: product.keyfeatures || [],
+        merchant: product.merchant
     }
 }

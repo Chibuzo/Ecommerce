@@ -20,7 +20,7 @@
     <div class="product-card__info">
         <div class="product-card__name">
             <a href="product.html">{{ item.product_name }}</a></div>
-        <div class="product-card__rating">
+        <!--<div class="product-card__rating">
             <div class="rating">
                 <div class="rating__body"><svg class="rating__star rating__star--active"
                         width="13px" height="12px">
@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="product-card__rating-legend">9 Reviews</div>
-        </div>
+        </div>-->
     </div>
     <div class="product-card__actions">
         <div class="product-card__availability">Availability: <span class="text-success">In
@@ -118,7 +118,7 @@
         <div class="product-card__prices">&#8358;{{ item.price }}</div>
         <div class="product-card__buttons">
             <button class="btn btn-primary product-card__addtocart" type="button" 
-                onClick="addItemToCart({{ item.id }}, '{{ item.product_name }}', {{ item.unformatted_price }}, '{{ item.photo }}')">Add To Cart</button>
+                onClick="addItemToCart({{ item.id }}, '{{ item.product_name }}', {{ item.unformatted_price }}, '{{ item.photo }}', '{{ item.merchant }}')">Add To Cart</button>
             <button
                 class="btn btn-secondary product-card__addtocart product-card__addtocart--list"
                 type="button">Add To Cart</button> <button

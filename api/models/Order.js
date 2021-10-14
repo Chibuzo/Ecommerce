@@ -8,10 +8,6 @@
 module.exports = {
 
     attributes: {
-        merchant: {
-            model: 'merchant'
-        },
-
         user: {
             model: 'user'
         },
