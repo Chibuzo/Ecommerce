@@ -1,7 +1,10 @@
 
 module.exports = {
     fetchProducts: async (criteria = {}) => {
-        const products = await Product.find({ limit: 30, ...criteria, removed: false, stock: { '>': 0 } }).populate('merchant').populate('productphotos');
+        const products = await Product.find({
+            limit: 30, ...criteria, removed: false, stock: { '>': 0 }
+        }).populate('merchant').populate('productphotos');
+
         return products.map(product => sanitizeProduct(product));
     },
 
@@ -21,11 +24,21 @@ module.exports = {
 
     fetchNewArrivals: async () => {
         const criteria = {
-            limit: 6,
+            limit: 12,
             sort: 'createdAt DESC'
         };
         return module.exports.fetchProducts(criteria);
+    },
+
+    findByCategory: async categoryId => {
+        return module.exports.fetchProducts({ category: categoryId });
+    },
+
+    findBySubCategory: async subCategoryId => {
+        return module.exports.fetchProducts({ sub_category: subCategoryId });
     }
+
+
 }
 
 function sanitizeProduct(product) {

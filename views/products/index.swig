@@ -245,7 +245,7 @@
                             </div>
                             <div class="product-card__info">
                                 <div class="product-card__name">
-                                    <a href="">{{ arrival.product_name }}</a></div>
+                                    <a href="/item/view/{{ arrival.id }}">{{ arrival.product_name }}</a></div>
                                 <!--<div class="product-card__rating">
                                     <div class="rating">
                                         <div class="rating__body"><svg

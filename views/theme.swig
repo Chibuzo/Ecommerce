@@ -179,8 +179,14 @@
                     <div class="topbar__container container">
                         <div class="topbar__row float-right">
                             <div class="topbar__item">
-                                <div class="topbar-dropdown"><button class="topbar-dropdown__btn" type="button">
-                                    <a href="/account">My Account</a>
+                                <div class="topbar-dropdown">
+                                    <button class="topbar-dropdown__btn" type="button">
+                                        {% if req.session.user %}
+                                            <a href="/user/dashboard">My Dashboard</a>
+                                        {% else %}    
+                                            <a href="/account">My Account</a>
+                                        {% endif %}    
+                                    </button>    
                                 </div>
                             </div>
                         </div>
@@ -204,7 +210,7 @@
                     </div>
                     <div class="site-header__phone">
                         <div class="site-header__phone-title">Customer Service</div>
-                        <div class="site-header__phone-number">(800) 060-0730</div>
+                        <div class="site-header__phone-number">(+234) 708-6536-634</div>
                     </div>
                 </div>
                 <div class="site-header__nav-panel">
@@ -246,9 +252,10 @@
                                                         </div>
                                                     </li>-->
                                                     {% for category in categories %}
+                                                        {% set category_path = category.category_name.split(' ') %}
                                                         {% if category.subcategories.length %}
                                                             <li class="departments__item departments__item--menu">
-                                                                <a href="#">{{ category.category_name }}
+                                                                <a href="/category/{{ category.id }}/{{ category_path.join('-') }}">{{ category.category_name }}
                                                                     <svg class="departments__link-arrow" width="6px" height="9px">
                                                                         <use
                                                                             xlink:href="/images/sprite.svg#arrow-rounded-right-6x9">
@@ -258,13 +265,14 @@
                                                                 <div class="departments__menu">
                                                                     <ul class="menu menu--layout--classic">
                                                                         {% for subcategory in category.subcategories %}
-                                                                            <li><a href="#">{{ subcategory.sub_category_name }}</a></li>
+                                                                            {% set subcategory_path = subcategory.sub_category_name.split(' ') %}
+                                                                            <li><a href="/subcategory/{{ subcategory.id }}/{{ subcategory_path.join('-') }}">{{ subcategory.sub_category_name }}</a></li>
                                                                         {% endfor %}    
                                                                     </ul>
                                                                 </div>        
                                                             </li>        
                                                         {% else %}
-                                                            <li class="departments__item"><a href="#">{{ category.category_name }}</a></li>
+                                                            <li class="departments__item"><a href="/category/{{ category.id }}/{{ category_path.join('-') }}">{{ category.category_name }}</a></li>
                                                         {% endif %}    
                                                     {% endfor %}    
                                                 </ul>
@@ -430,8 +438,8 @@
                     </div>
                     <div class="site-footer__bottom">
                         <div class="site-footer__copyright"><a target="_blank"
-                                href="https://www.templateshub.net">ShoppingAnswer</a></div>
-                        <div class="site-footer__payments"><img src="images/payments.png" alt=""></div>
+                                href="https://shoppinganswer.com">ShoppingAnswer</a></div>
+                        <div class="site-footer__payments"></div>
                     </div>
                 </div>
             </div>

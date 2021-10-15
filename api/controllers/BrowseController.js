@@ -40,7 +40,20 @@ module.exports = {
         try {
             const categoryId = req.param('id');
             const [products, categories] = await Promise.all([
-                Product.find({ category: categoryId, removed: false }).populate('productphotos'),
+                ProductService.findByCategory(categoryId),
+                ProductService.fetchCategories(req)
+            ]);
+            return res.view('products/index', { products, categories });
+        } catch (err) {
+            return res.badRequest(err);
+        }
+    },
+
+    async findBySubCategory(req, res) {
+        try {
+            const subCategoryId = req.param('id');
+            const [products, categories] = await Promise.all([
+                ProductService.findBySubCategory(subCategoryId),
                 ProductService.fetchCategories(req)
             ]);
             return res.view('products/index', { products, categories });

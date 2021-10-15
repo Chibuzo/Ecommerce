@@ -90,7 +90,11 @@ module.exports.routes = {
 
     //'GET /payment': 'PaymentController.paymentPage'
     // category route
-    'GET /section/:id/*': 'BrowseController.findByCategory',
+    // 'GET /section/:id/*': 'BrowseController.findByCategory',
+
+    'GET /category/:id/*': 'BrowseController.findByCategory',
+
+    'GET /subcategory/:id/*': 'BrowseController.findBysubCategory',
 
     'GET /merchants/show-all': 'MerchantController.view',
 

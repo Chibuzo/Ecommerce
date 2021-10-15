@@ -12,7 +12,6 @@
 	margin-right: 15px;
 	border-radius: 3px;
 	margin-left: 20px;
-  margin-top: 60px;
 	padding: 0;
   overflow: hidden;
 }
