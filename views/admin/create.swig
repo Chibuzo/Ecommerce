@@ -8,7 +8,7 @@
         <div class="auth-panel">
             <h2 class="text-center">SIGN UP</h2><br>
 			<div class="alert alert-success hidden" id="confirm">Thank you for signing up with us. Please check your email for activation message.</div>
-			<form action="/user/signup" method="post" class="form-vertical" id="signup">
+			<form action="/user/register" method="post" class="form-vertical" id="signup">
                 <div class="form-group">
                     <label for="fullname">FULL NAME</label>
                     <input type="text" name="fullname" id="fullname" class="form-control input-lg" required />
@@ -34,8 +34,8 @@
 </section>
 {% endblock %}
 
-{% block script %}
-{#<script>#}
+{% block scriptTag %}
+<script>
 $("#signup").submit(function(e) {
 	e.preventDefault();
 	var $this = $(this);
@@ -54,5 +54,5 @@ $("#signup").submit(function(e) {
 		$this.find('button').text("SIGN UP").prop('disabled', false);
 	}, 'JSON');
 });
-{#</script>#}
+</script>
 {% endblock %}
