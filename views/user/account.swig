@@ -48,16 +48,28 @@
                 <div class="card flex-grow-1 mb-0">
                     <div class="card-body">
                         <h3 class="card-title">Register</h3>
-                        <form method="post" action="user/register">
-                            <div class="form-group"><label>Full name</label> <input type="text"
-                                    class="form-control" placeholder="Enter Full name" name="fullname"></div>
+                        <form method="post" action="user/register" id="signup-form">
+                            <div class="form-row">
+                                <div class="form-group col-md-6"><label for="checkout-first-name">First
+                                        Name</label> <input type="text" class="form-control" name="fname"
+                                        id="checkout-first-name" placeholder="First Name"></div>
+                                <div class="form-group col-md-6"><label for="checkout-last-name">Last
+                                        Name</label> <input type="text" class="form-control" name="lname"
+                                        id="checkout-last-name" placeholder="Last Name"></div>
+                            </div>
                             <div class="form-group"><label>Email address</label> <input type="email"
                                     class="form-control" placeholder="Enter email" name="email"></div>
-                            <div class="form-group"><label>Password</label> <input type="password"
-                                    class="form-control" placeholder="Password" name="password" id="password"></div>
-                            <div class="form-group"><label>Repeat Password</label> <input type="password"
-                                    class="form-control" placeholder="Password" id="verify-password"></div><button type="submit"
-                                class="btn btn-primary mt-4">Register</button>
+                            <div class="form-row">
+                                <div class="form-group col-md-6"><label for="checkout-email">Password
+                                        </label> <input type="password" class="form-control" name="password"
+                                        id="password" placeholder="Enter Password"></div>
+                                <div class="form-group col-md-6"><label for="checkout-phone">Confirm Password</label>
+                                    <input type="password" class="form-control" id="verify-password" name="verify_password"
+                                        placeholder="Confirm Password">
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary mt-4">Register</button>
                         </form>
                     </div>
                 </div>
@@ -75,14 +87,34 @@
 
 		$(this).find('button').html("<i class='fa fa-cog fa-spin'></i> Processing").prop('disabled', true);
     
-        $.post('/user/login', $(this).serialize(), function(d) {
+        login($this, $this.serialize());
+	});
+
+    $("#signup-form").submit(function(e) {
+		e.preventDefault();
+		const $this = $(this);
+
+		$(this).find('button').html("<i class='fa fa-cog fa-spin'></i> Processing").prop('disabled', true);
+    
+        $.post('/user/register', $(this).serialize(), function(d) {
             if (d.status.trim() == 'success') {
-                location.replace('/user/dashboard');
+                login($this, $this.serialize());
             } else {
-                $(".alert-danger").html("<strong>Error:</strong> " + d.msg).removeClass('d-none');
+                $this.find(".alert-danger").html("<strong>Error:</strong> " + d.message).removeClass('d-none');
             }
             $this.find('button').html("<i class='fa fa-sign-in fa-lg'></i>&nbsp; Login").prop('disabled', false);
         }, 'JSON');
 	});
+
+function login($this, formData) {
+    $.post('/user/login', formData, function(d) {
+        if (d.status.trim() == 'success') {
+            location.replace('/user/dashboard');
+        } else {
+            $this.find(".alert-danger").html("<strong>Error:</strong> " + d.msg).removeClass('d-none');
+        }
+        $this.find('button').html("<i class='fa fa-sign-in fa-lg'></i>&nbsp; Login").prop('disabled', false);
+    }, 'JSON');
+}    
 </script>
 {% endblock %}

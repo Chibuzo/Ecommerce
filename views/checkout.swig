@@ -72,7 +72,7 @@
                             </div>
                              <div class="form-row">
                                 <div class="form-group col-md-6"><label for="checkout-email">Password
-                                        address</label> <input type="password" class="form-control" name="password"
+                                        </label> <input type="password" class="form-control" name="password"
                                         id="password" placeholder="Enter Password"></div>
                                 <div class="form-group col-md-6"><label for="checkout-phone">Confirm Password</label>
                                     <input type="password" class="form-control" id="verify-password" name="verify_password"

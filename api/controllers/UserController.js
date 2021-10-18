@@ -7,8 +7,13 @@
 const Passwords = require('machinepack-passwords');
 
 module.exports = {
-    signup: function (req, res) {
-        return UserService.create(req.body);
+    async signup(req, res) {
+        try {
+            const user = await UserService.create(req.body);
+            return res.status(201).json({ status: 'success', user });
+        } catch (err) {
+            res.status(500).json({ status: 'error', message: err.message })
+        }
     },
 
     findAccount: function (req, res) {
@@ -52,8 +57,12 @@ module.exports = {
     },
 
     async showAaccountPage(req, res) {
-        const categories = await ProductService.fetchCategories(req);
-        return res.view('user/account', { categories });
+        try {
+            const categories = await ProductService.fetchCategories(req);
+            return res.view('user/account', { categories });
+        } catch (err) {
+            res.serverError(err);
+        }
     },
 
     async dashboard(req, res) {
@@ -64,14 +73,16 @@ module.exports = {
             User.findOne({ id: req.session.user.id }).populate('contacts'),
             ProductService.fetchCategories(req),
             Order.find({ user: req.session.user.id })
-        ]);
+        ]).catch(err => {
+            return res.serverError(err);
+        });
 
         return res.view('user/dashboard', { user, categories, orders });
     },
 
     updateDetails: function (req, res) {
-        var q = req.param;
-        var data = {
+        const q = req.param;
+        const data = {
             phone: q('phone'),
             address: q('address'),
             user: req.session.userId
