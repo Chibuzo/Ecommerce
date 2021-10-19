@@ -58,14 +58,14 @@ module.exports = {
                         photo
                             .resize(700, 700)
                             .quality(90)
-                            .write(zoomphoto);
+                            .write(zoomphoto, () => {
+                                const zoomCRS = fs.createReadStream(zoomphoto);
+                                const zoomCWS = fs.createWriteStream(zoomTemp);
+                                zoomCRS.on('error', (err) => console.log(err));
+                                zoomCWS.on('error', (err) => console.log('Write Error'));
 
-                        const zoomCRS = fs.createReadStream(zoomphoto);
-                        const zoomCWS = fs.createWriteStream(zoomTemp);
-                        zoomCRS.on('error', (err) => console.log(err));
-                        zoomCWS.on('error', (err) => console.log('Write Error'));
-
-                        zoomCRS.pipe(zoomCWS);
+                                zoomCRS.pipe(zoomCWS);
+                            });
 
                         // resize browse
                         const browse = path.resolve(sails.config.appPath, 'assets/product_photos/browse') + '/' + filename;
@@ -74,14 +74,14 @@ module.exports = {
                         photo
                             .resize(400, 400)
                             .quality(90)
-                            .write(browse);
+                            .write(browse, () => {
+                                const bwsCRS = fs.createReadStream(browse);
+                                const bwsCWS = fs.createWriteStream(browseTemp);
+                                bwsCRS.on('error', (err) => console.log(err));
+                                bwsCWS.on('error', (err) => console.log('Write Error'));
 
-                        const bwsCRS = fs.createReadStream(browse);
-                        const bwsCWS = fs.createWriteStream(browseTemp);
-                        bwsCRS.on('error', (err) => console.log(err));
-                        bwsCWS.on('error', (err) => console.log('Write Error'));
-
-                        bwsCRS.pipe(bwsCWS);
+                                bwsCRS.pipe(bwsCWS);
+                            });
 
                         const thumbphoto = path.resolve(sails.config.appPath, 'assets/product_photos/thumbnail') + '/' + filename;
                         const thumbTemp = path.resolve(sails.config.appPath, '.tmp/public/product_photos/thumbnail') + '/' + filename;
@@ -89,16 +89,15 @@ module.exports = {
                         photo
                             .resize(100, 100)
                             .quality(90)
-                            .write(thumbphoto);
+                            .write(thumbphoto, () => {
+                                const thumbCRS = fs.createReadStream(thumbphoto);
+                                const thumbCWS = fs.createWriteStream(thumbTemp);
+                                thumbCRS.on('error', (err) => console.log(err));
+                                thumbCWS.on('error', (err) => console.log('Write Error'));
 
-                        const thumbCRS = fs.createReadStream(thumbphoto);
-                        const thumbCWS = fs.createWriteStream(thumbTemp);
-                        thumbCRS.on('error', (err) => console.log(err));
-                        thumbCWS.on('error', (err) => console.log('Write Error'));
-
-                        thumbCRS.pipe(thumbCWS);
+                                thumbCRS.pipe(thumbCWS);
+                            });
                     });
-
                 } catch (err) {
                     console.log(err);
                 }
