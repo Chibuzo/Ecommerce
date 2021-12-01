@@ -73,7 +73,7 @@
     </div>
 </div>            
 
- <!-- popular categories -->
+ <!-- popular categories 
 <div class="block block--highlighted block-categories block-categories--layout--classic">
     <div class="container">
         <div class="block-header">
@@ -84,7 +84,7 @@
             <div class="block-categories__item category-card category-card--layout--classic">
                 <div class="category-card__body">
                     <div class="category-card__image"><a href="#"><img
-                                src="images/categories/category-1.jpg" alt=""></a></div>
+                                src="/images/categories/category-1.jpg" alt=""></a></div>
                     <div class="category-card__content">
                         <div class="category-card__name"><a href="#">Power Tools</a></div>
                         <ul class="category-card__links">
@@ -102,7 +102,7 @@
             <div class="block-categories__item category-card category-card--layout--classic">
                 <div class="category-card__body">
                     <div class="category-card__image"><a href="#"><img
-                                src="images/categories/category-2.jpg" alt=""></a></div>
+                                src="/images/categories/category-2.jpg" alt=""></a></div>
                     <div class="category-card__content">
                         <div class="category-card__name"><a href="#">Hand Tools</a></div>
                         <ul class="category-card__links">

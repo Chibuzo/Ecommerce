@@ -384,14 +384,10 @@
                                     <ul class="footer-links__list">
                                         <li class="footer-links__item"><a href="/services" class="footer-links__link">Our Services
                                                 </a></li>
-                                        <li class="footer-links__item"><a href="/delivery-info" class="footer-links__link">Delivery
-                                                Information</a></li>
                                         <li class="footer-links__item"><a href="privacy-policy" class="footer-links__link">Privacy
                                                 Policy</a></li>
                                         <li class="footer-links__item"><a href="/contact" class="footer-links__link">Contact
                                                 Us</a></li>
-                                        <li class="footer-links__item"><a href="#"
-                                                class="footer-links__link">Returns</a></li>
                                     </ul>
                                 </div>
                             </div>
