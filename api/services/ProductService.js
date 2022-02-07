@@ -13,13 +13,9 @@ module.exports = {
         return sanitizeProduct(product);
     },
 
-    fetchCategories: async req => {
-        if (req.session.categories) return req.session.categories;
-
-        req.session.categories = await Category.find({ removed: false, select: ['id', 'category_name'] })
+    fetchCategories: async (req = null) => {
+        return Category.find({ removed: false, select: ['id', 'category_name'] })
             .populate('subcategories', { removed: false, select: ['id', 'sub_category_name'] });
-        req.session.save();
-        return req.session.categories;
     },
 
     fetchNewArrivals: async () => {

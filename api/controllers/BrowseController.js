@@ -13,7 +13,7 @@ module.exports = {
         try {
             const [products, categories, newArrivals] = await Promise.all([
                 ProductService.fetchProducts(),
-                ProductService.fetchCategories(req),
+                ProductService.fetchCategories(),
                 ProductService.fetchNewArrivals()
             ]);
             return res.view('products/index', { products, newArrivals, categories });
@@ -26,7 +26,7 @@ module.exports = {
         try {
             const [product, categories] = await Promise.all([
                 ProductService.fetchProduct(req.params.id),
-                ProductService.fetchCategories(req)
+                ProductService.fetchCategories()
             ]);
 
             if (!product) throw new Error('Item not found!');
@@ -41,7 +41,7 @@ module.exports = {
             const categoryId = req.param('id');
             const [products, categories] = await Promise.all([
                 ProductService.findByCategory(categoryId),
-                ProductService.fetchCategories(req)
+                ProductService.fetchCategories()
             ]);
             return res.view('products/index', { products, categories });
         } catch (err) {
@@ -54,7 +54,7 @@ module.exports = {
             const subCategoryId = req.param('id');
             const [products, categories] = await Promise.all([
                 ProductService.findBySubCategory(subCategoryId),
-                ProductService.fetchCategories(req)
+                ProductService.fetchCategories()
             ]);
             return res.view('products/index', { products, categories });
         } catch (err) {
