@@ -16,7 +16,7 @@ module.exports = {
                 ProductService.fetchCategories(req),
                 ProductService.fetchNewArrivals()
             ]);
-            return res.view('products/index', { products, newArrivals, categories, popular_categories: categories.length = 6 });
+            return res.view('products/index', { products, newArrivals, categories });
         } catch (err) {
             return res.badRequest(err);
         }

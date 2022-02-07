@@ -16,20 +16,34 @@
 </div>
 <div class="block">
 	<section class="container" style="margin-top: 20px">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 auth-panel">
-				<form action="/user/login" method="post" class="form-vertical" id="signin">
-					<div class="form-group">
-						<label>EMAIL</label>
-						<input type="email" name="email" class="form-control input-lg" required />
-					</div>
-					<div class="form-group">
-						<label>PASSWORD</label>
-						<input type="password" name="password" class="form-control input-lg" required />
-					</div>
-					<button type="submit" class="btn btn-default input-lg btn-block"><i class="fa fa-sign-in fa-lg"></i>&nbsp; SIGN IN </button>
-				</form>
-			</div>
+		<div class="row content-justify-center">
+			<div class="col-md-6 d-flex">
+                <div class="card flex-grow-1 mb-md-0">
+                    <div class="card-body">
+                        <form method="post" action="/user/login" id="signin">
+                            <div class="form-group"><label>Email address</label> <input type="email"
+                                    class="form-control" placeholder="Enter email" name="email"></div>
+                            <div class="form-group"><label>Password</label> <input type="password"
+                                    class="form-control" placeholder="Password" name="password"> <small
+                                    class="form-text text-muted"><a href="#">Forgotten Password</a></small>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check"><span class="form-check-input input-check"><span
+                                            class="input-check__body"><input class="input-check__input"
+                                                type="checkbox" id="login-remember"> <span
+                                                class="input-check__box"></span> <svg
+                                                class="input-check__icon" width="9px" height="7px">
+                                                <use xlink:href="images/sprite.svg#check-9x7"></use>
+                                            </svg> </span></span><label class="form-check-label"
+                                        for="login-remember">Remember Me</label></div>
+                            </div>
+                            <div class="alert alert-danger d-none"></div>
+                            <button type="submit" class="btn btn-primary mt-4">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+       
 		</div>
 	</section>
 </div>    

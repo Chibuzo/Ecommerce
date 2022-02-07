@@ -118,7 +118,7 @@
         <div class="product-card__prices">&#8358;{{ item.price }}</div>
         <div class="product-card__buttons">
             <button class="btn btn-primary product-card__addtocart" type="button" 
-                onClick="addItemToCart({{ item.id }}, '{{ item.product_name }}', {{ item.unformatted_price }}, '{{ item.photo }}', '{{ item.merchant }}')">Add To Cart</button>
+                onClick="addItemToCart({{ item.id }}, '{{ item.product_name }}', {{ item.unformatted_price }}, '{{ item.photo }}', '{{ item.merchant.name }}')">Add To Cart</button>
             <button
                 class="btn btn-secondary product-card__addtocart product-card__addtocart--list"
                 type="button">Add To Cart</button> <button
