@@ -38,8 +38,8 @@
                             <th>Sub Category</th>
                             <th class="text-right">Stock</th>
                             <th>Color</th>
-                            <th class="text-right">Cost Price</th>
-                            <th class="text-right">Selling Price</th>
+                            <th class="text-right hidden">Cost Price</th>
+                            <th class="text-right">Price</th>
                             <th class="hidden"></th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -53,7 +53,7 @@
                                 <td id="{{ item.sub_category.id }}">{{ item.sub_category.sub_category_name }}</td>
                                 <td class="text-right">{{ item.stock }}</td>
                                 <td>{{ item.color }}</td>
-                                <td class="text-right">&#8358;{{ item.cost_price }}</td>
+                                <td class="text-right hidden">&#8358;{{ item.cost_price }}</td>
                                 <td class="text-right">&#8358;{{ item.selling_price }}</td>
                                 <td class="hidden">{{ item.description }}</td>
                                 <td class="opt-icons">  

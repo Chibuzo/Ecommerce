@@ -85,9 +85,9 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <input type="hidden" name="product_id" value="{{ item.id }}" />
-                                            <div class="col-md-4"><input type="text" name="feature" class="form-control" placeholder="E.g camera specs" /></div>
-                                            <div class="col-md-7"><input type="text" name="feature_value" class="form-control" placeholder="E.g 16 Mega Pixels" /></div>
-                                            <div class="col-md-1"><button type="submit" class="btn btn-info">Add</dic>
+                                            <div class="col-md-4"><input type="text" name="feature" class="form-control" placeholder="E.g camera specs" required /></div>
+                                            <div class="col-md-7"><input type="text" name="feature_value" class="form-control" placeholder="E.g 16 Mega Pixels" required /></div>
+                                            <div class="col-md-1"><button type="submit" class="btn btn-info">Add</div>
                                         </div>
                                     </div>
                                 </form>

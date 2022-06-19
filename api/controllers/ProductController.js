@@ -28,8 +28,8 @@ module.exports = {
             merchant: q('merchant'),
             category: q('category_id'),
             sub_category: q('sub_category_id'),
-            stock: q('stock'),
-            selling_price: q('price'),
+            stock: parseFloat(q('stock')),
+            selling_price: parseFloat(q('price'))
         };
         Product.create(data).exec(function (err, item) {
             if (err) return res.badRequest(err);
@@ -46,8 +46,8 @@ module.exports = {
             sub_category: q('sub_category_id'),
             stock: q('stock'),
             color: q('color'),
-            cost_price: q('cost'),
-            selling_price: q('price'),
+            stock: parseFloat(q('stock')),
+            selling_price: parseFloat(q('price'))
         };
         Product.update({ id: q('product_id') }, data).exec(function (err) {
             if (err) return res.badRequest(err);

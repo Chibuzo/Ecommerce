@@ -29,7 +29,8 @@ module.exports = {
         },
 
         stock: {
-            type: 'integer'
+            type: 'integer',
+            defaultsTo: 0
         },
 
         color: {
@@ -37,11 +38,13 @@ module.exports = {
         },
 
         cost_price: {
-            type: 'float'
+            type: 'float',
+            defaultsTo: 0
         },
 
         selling_price: {
-            type: 'float'
+            type: 'float',
+            defaultsTo: 0
         },
 
         productphotos: {

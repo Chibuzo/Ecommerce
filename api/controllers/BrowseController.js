@@ -5,8 +5,6 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-const ProductService = require("../services/ProductService");
-
 
 module.exports = {
     async index(req, res) {
